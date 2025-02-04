@@ -4,8 +4,8 @@ public class Saab95 extends Car{
 
     private static final int NR_DOORS = 2;
     private static final double turbo = 1.3;
-    public static final int ENGINE_POWER = 125;
-    public static final String MODEL_NAME = "Saab95";
+    private static final int ENGINE_POWER = 125;
+    private static final String MODEL_NAME = "Saab95";
 
     public boolean turboOn;
 

@@ -4,8 +4,8 @@ public class Scania extends Vehicle {
 
 
     private static final int NR_DOORS = 2;
-    public static final int ENGINE_POWER = 50;
-    public static final String MODEL_NAME = "Scania";
+    private static final int ENGINE_POWER = 50;
+    private static final String MODEL_NAME = "Scania";
 
     public Scania(Color color){
         super(Scania.NR_DOORS, color, Scania.ENGINE_POWER, Scania.MODEL_NAME);
