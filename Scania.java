@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania extends Vehicle {
+public class Scania extends Truck {
 
 
     private static final int NR_DOORS = 2;
@@ -11,6 +11,9 @@ public class Scania extends Vehicle {
         super(Scania.NR_DOORS, color, Scania.ENGINE_POWER, Scania.MODEL_NAME);
     }
 
+    private double truckBedAngle = 0.0;
+    private double maxAngle = 70;
+
 
 
     @Override
@@ -18,6 +21,30 @@ public class Scania extends Vehicle {
         return getEnginePower() * 0.01;
     }
 
+    @Override
+    protected void rampOpen() {
+        truckBedAngle += 1.0;
+        clampAngle();
+    }
 
+    private void clampAngle(){
+        if (truckBedAngle < 0.0) truckBedAngle = 0.0;
+        if (truckBedAngle > maxAngle) truckBedAngle = maxAngle;
+    }
 
+    @Override
+    protected void rampClose() {
+        truckBedAngle -= 1.0;
+        clampAngle();
+    }
+
+    @Override
+    protected <T> T LoadTruck() {
+        return null;
+    }
+
+    @Override
+    protected <T> T unLoadTruck() {
+        return null;
+    }
 }
