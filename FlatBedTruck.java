@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class FlatBedTruck extends Vehicle {
+public class FlatBedTruck extends Truck {
 
     private static final int NR_DOORS = 2;
     public static final int ENGINE_POWER = 250;

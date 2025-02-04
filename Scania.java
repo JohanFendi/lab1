@@ -11,4 +11,6 @@ public class Scania extends Vehicle {
         super(Scania.NR_DOORS, color, Scania.ENGINE_POWER, Scania.MODEL_NAME);
     }
 
+
+
 }
