@@ -23,6 +23,7 @@ public class Scania extends Truck {
 
     @Override
     protected void adjustRamp(double angle) {
+        if()
         truckBedAngle = angle;
         clamp(0.0,maxAngle,truckBedAngle);
     }
