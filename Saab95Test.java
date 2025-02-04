@@ -1,6 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -87,11 +86,8 @@ class Saab95Test {
         saab.turnRight();
         saab.turnRight();
         saab.turnLeft();
-        System.out.println(saab.getxVector());
-        System.out.println(saab.getyVector());
         assertTrue(saab.getyVector() == -1 && saab.getxVector() == 0);
     }
-
 
     @Test
     void testMoveForwardXmToLeftXm(){
