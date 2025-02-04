@@ -7,9 +7,11 @@ abstract public class Truck extends Vehicle {
         super(nrDoors, color, enginePower, modelName);
     }
 
+    private boolean isLoadable;
+
     abstract protected double rampOpen();
     abstract protected double rampClose();
-    abstract protected double loadTruck();
-    abstract protected T unLoadTruck<T>;
+    abstract protected <T> T LoadTruck();
+    abstract protected <T> T unLoadTruck();
 
 }
