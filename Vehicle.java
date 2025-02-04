@@ -27,10 +27,13 @@ abstract public class Vehicle implements Movable {
         stopEngine();
     }
 
-    protected void clamp(double minValue, double maxValue, double value){
+    protected double clamp(double minValue, double maxValue, double value){
         if (value < minValue) value = minValue;
         if (value > maxValue) value = maxValue;
+        return value;
     }
+
+
 
     @Override
     public void move(){
@@ -126,6 +129,10 @@ abstract public class Vehicle implements Movable {
     public double getYPos(){
         return this.yPos;
     }
+
+    public void setXpos(double x) { this.xPos = x; }
+
+    public void setYpos(double y) { this.yPos = y; }
 }
 
 

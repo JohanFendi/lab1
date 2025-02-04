@@ -1,7 +1,7 @@
 
 import java.awt.*;
 
-abstract public class Truck extends Vehicle {
+abstract public class Truck<T> extends Vehicle {
 
     public Truck(int nrDoors, Color color, double enginePower, String modelName) {
         super(nrDoors, color, enginePower, modelName);
@@ -10,7 +10,7 @@ abstract public class Truck extends Vehicle {
     private boolean isLoadable;
 
     abstract protected void adjustRamp(double angle);
-    abstract protected <T> T LoadTruck();
-    abstract protected <T> T unLoadTruck();
+    abstract protected void LoadTruck(T x);
+    abstract protected T unLoadTruck();
 
 }

@@ -1,18 +1,20 @@
 import java.awt.*;
-
-public class Scania extends Truck {
+                    //TODO satte "Double" tillfälligt
+public class Scania extends Truck<Double> {
 
 
     private static final int NR_DOORS = 2;
     private static final int ENGINE_POWER = 50;
     private static final String MODEL_NAME = "Scania";
 
+    private double truckBedAngle = 0.0;
+    private double maxAngle = 70;
+
     public Scania(Color color){
         super(Scania.NR_DOORS, color, Scania.ENGINE_POWER, Scania.MODEL_NAME);
     }
 
-    private double truckBedAngle = 0.0;
-    private double maxAngle = 70;
+
 
 
 
@@ -30,12 +32,15 @@ public class Scania extends Truck {
 
 
     @Override
-    protected <T> T LoadTruck() {
-        return null;
+    protected void LoadTruck(Double x) {
+
     }
 
     @Override
-    protected <T> T unLoadTruck() {
+    protected Double unLoadTruck() {
         return null;
     }
+
+
+
 }
