@@ -130,6 +130,8 @@ abstract public class Vehicle implements Movable {
         return this.yPos;
     }
 
+
+    //TODO kanske protected?
     public void setXpos(double x) { this.xPos = x; }
 
     public void setYpos(double y) { this.yPos = y; }

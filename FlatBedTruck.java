@@ -52,14 +52,15 @@ public class FlatBedTruck extends Truck<Car> {
         return getEnginePower() * 0.01;
     }
 
+
+    // TODO onödig kodduplicering? kan fucka med vinklarna, om man använder denna istället för openRamp eller closeRamp?
     @Override
     protected void adjustRamp(double angle) {
         this.currentFlatBedAngle = clamp(0, maxFlatBedAngle, angle);
-        // TODO onödig kodduplicering? kan fucka med vinklarna, om man använder denna istället för openRamp eller closeRamp
-
     }
 
 
+    // TODO kanske flytta till Vehicle?
     private boolean isWithinRadius (Car car) {
         double radius = 1;
         double carX = car.getXPos();
@@ -98,7 +99,9 @@ public class FlatBedTruck extends Truck<Car> {
         return unloadedCar;
     }
 
-    // TODO implementera att alla bilars position som är lastade på transporten uppdateras med lastbilens position
+
+
+    // TODO: implementera att alla bilars position som är lastade på transporten uppdateras med lastbilens position
 
 
 }

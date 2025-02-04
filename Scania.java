@@ -25,9 +25,7 @@ public class Scania extends Truck<Double> {
 
     @Override
     protected void adjustRamp(double angle) {
-        if()
-        truckBedAngle = angle;
-        clamp(0.0,maxAngle,truckBedAngle);
+        this.truckBedAngle = clamp(0.0,maxAngle,angle);
     }
 
 
@@ -43,5 +41,6 @@ public class Scania extends Truck<Double> {
     }
 
 
+    // TODO implementera att lastbilen inte ska kunna köra med flaket uppfällt
 
 }

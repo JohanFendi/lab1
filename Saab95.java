@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Saab95 extends Car{
+public class Saab95 extends Car {
 
     private static final int NR_DOORS = 2;
     private static final double turbo = 1.3;
@@ -23,7 +23,7 @@ public class Saab95 extends Car{
     }
 
     @Override
-    public double speedFactor(){
+    public double speedFactor() {
         double turbo = 1;
         if(turboOn) turbo = Saab95.turbo;
         return getEnginePower() * 0.01 * turbo;
