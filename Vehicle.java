@@ -27,6 +27,11 @@ abstract public class Vehicle implements Movable {
         stopEngine();
     }
 
+    protected void clamp(double minValue, double maxValue, double value){
+        if (value < minValue) value = minValue;
+        if (value > maxValue) value = maxValue;
+    }
+
     @Override
     public void move(){
         this.xPos += this.currentSpeed * this.xVector;
@@ -89,18 +94,13 @@ abstract public class Vehicle implements Movable {
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
-    private void clampSpeed(){
-        if (currentSpeed < 0) currentSpeed = 0;
-        if (currentSpeed > this.enginePower) currentSpeed = this.enginePower;
-    }
-
     public void gas(double amount){
         if (amount < 0 || amount > 1){
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
 
         incrementSpeed(amount);
-        clampSpeed();
+        clamp(0.0,this.enginePower,currentSpeed);
     }
 
     public void brake(double amount){
@@ -108,7 +108,7 @@ abstract public class Vehicle implements Movable {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
         decrementSpeed(amount);
-        clampSpeed();
+        clamp(0.0,this.enginePower,currentSpeed);
     }
 
     public int getxVector(){

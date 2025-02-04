@@ -22,21 +22,12 @@ public class Scania extends Truck {
     }
 
     @Override
-    protected void rampOpen() {
-        truckBedAngle += 1.0;
-        clampAngle();
+    protected void adjustRamp(double angle) {
+        truckBedAngle = angle;
+        clamp(0.0,maxAngle,truckBedAngle);
     }
 
-    private void clampAngle(){
-        if (truckBedAngle < 0.0) truckBedAngle = 0.0;
-        if (truckBedAngle > maxAngle) truckBedAngle = maxAngle;
-    }
 
-    @Override
-    protected void rampClose() {
-        truckBedAngle -= 1.0;
-        clampAngle();
-    }
 
     @Override
     protected <T> T LoadTruck() {
