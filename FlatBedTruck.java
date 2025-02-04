@@ -16,18 +16,24 @@ public class FlatBedTruck extends Truck {
 
 
 
+    public void openRamp() {
+        adjustRamp(90);
+    }
+    public void closeRamp() {
+        adjustRamp(0);
+    }
+
 
     @Override
     protected double speedFactor(){
         return getEnginePower() * 0.01;
     }
 
+    @Override
+    protected void adjustRamp(double angle) {
+        if(getCurrentSpeed() == 0) {
 
-    @Override
-    public void rampOpen() {
-    }
-    @Override
-    public void rampClose() {
+        }
     }
 
     @Override
