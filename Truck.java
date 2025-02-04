@@ -9,8 +9,8 @@ abstract public class Truck extends Vehicle {
 
     private boolean isLoadable;
 
-    abstract protected double rampOpen();
-    abstract protected double rampClose();
+    abstract protected void rampOpen();
+    abstract protected void rampClose();
     abstract protected <T> T LoadTruck();
     abstract protected <T> T unLoadTruck();
 

@@ -19,11 +19,11 @@ public class FlatBedTruck extends Truck {
 
 
     @Override
-    public double rampOpen() {
+    public void rampOpen() {
         return 0;
     }
     @Override
-    public double rampClose() {
+    public void rampClose() {
         return 0;
     }
 
