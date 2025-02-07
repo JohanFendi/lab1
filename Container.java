@@ -5,8 +5,6 @@ public class Container {
 
     private ArrayList<Double> container;
     private final int CONTAINER_MAXCAPACITY = 10;
-    private final double ANGLE_MAX = 70;
-    private final double MIN_ANGLE = 0;
     private double CURRENT_ANGLE = 0;
     private boolean IS_CONTAINER_DOWN = true;
 
@@ -30,7 +28,7 @@ public class Container {
         // TODO biltransporten måste stå stilla för att sänka den
     }
 
-    public void adjustRamp2(double angle){
+    public void adjustRamp(double angle){
         this.CURRENT_ANGLE = angle;
     }
 
