@@ -13,13 +13,15 @@ public class FlatBedTruck extends Truck<Car> {
     private final Deque<Car> flatbed;
     private double currentFlatBedAngle = 0.0;
     private double maxFlatBedAngle = 70;
+    private TruckContainer<Car> carContainer;
     // TODO kanske private double minFlatBedAngle = 0;?
     //private boolean flatBedOpen = false;
     //private boolean flatBedClosed = true;
 
 
     public FlatBedTruck(Color color){
-        super(FlatBedTruck.NR_DOORS, color, FlatBedTruck.ENGINE_POWER, FlatBedTruck.MODEL_NAME);
+
+        super(FlatBedTruck.NR_DOORS, color, FlatBedTruck.ENGINE_POWER, FlatBedTruck.MODEL_NAME,   );
         this.flatbed = new ArrayDeque<>(FLATBED_MAXCAPACITY);
 
     }
@@ -34,7 +36,10 @@ public class FlatBedTruck extends Truck<Car> {
     }
  */
 
-
+    @Override
+    protected boolean isLoadable() {
+        return false;
+    }
 
     public void openRamp() {
         if (getCurrentSpeed() > 0) {
@@ -76,7 +81,7 @@ public class FlatBedTruck extends Truck<Car> {
 
 
     @Override
-    protected void LoadTruck(Car car) {
+    protected void loadTruck(Car car) {
         if(currentFlatBedAngle == maxFlatBedAngle && isWithinRadius(car) && flatbed.size() < FLATBED_MAXCAPACITY) {
             car.setXpos(this.getXPos());
             car.setYpos(this.getYPos());
@@ -86,6 +91,7 @@ public class FlatBedTruck extends Truck<Car> {
 
     @Override
     protected Car unLoadTruck() {
+        // TODO mycket kodduplicering med koordinaterna?
         double truckX = this.getXPos();
         double truckY = this.getYPos();
 

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Saab95 extends Car {
+public class Saab95 extends Vehicle implements Car {
 
     private static final int NR_DOORS = 2;
     private static final double turbo = 1.3;

@@ -7,10 +7,10 @@ public class Scania extends Truck<Double> {
     private static final int ENGINE_POWER = 50;
     private static final String MODEL_NAME = "Scania";
 
-    private double truckBedAngle = 0.0;
-    private double maxAngle = 70;
+
 
     public Scania(Color color){
+
         super(Scania.NR_DOORS, color, Scania.ENGINE_POWER, Scania.MODEL_NAME);
     }
 
@@ -25,13 +25,20 @@ public class Scania extends Truck<Double> {
 
     @Override
     protected void adjustRamp(double angle) {
-        this.truckBedAngle = clamp(0.0,maxAngle,angle);
+        TruckContainer<Double> container = this.getContainer();
+        for (double a : angle) {
+            container.raiseContainer();
+        }
+    }
+
+    @Override
+    protected boolean isLoadable() {
+        return false;
     }
 
 
-
     @Override
-    protected void LoadTruck(Double x) {
+    protected void loadTruck(Double x) {
 
     }
 
