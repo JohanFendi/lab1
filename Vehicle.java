@@ -33,8 +33,6 @@ abstract public class Vehicle implements Movable {
         return value;
     }
 
-
-
     @Override
     public void move(){
         this.xPos += this.currentSpeed * this.xVector;
