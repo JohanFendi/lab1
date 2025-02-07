@@ -14,14 +14,10 @@ public class Scania extends Vehicle {
 
     Container container;
 
-    public Scania(Color color){
+    public Scania(Color color, double containerVolume){
         super(Scania.NR_DOORS, color, Scania.ENGINE_POWER, Scania.MODEL_NAME);
-        this.container = new Container();
+        this.container = new Container<>(containerVolume);
     }
-
-
-
-
 
     @Override
     protected double speedFactor(){
@@ -29,17 +25,6 @@ public class Scania extends Vehicle {
     }
 
     protected void adjustRamp(double angle) {
-        if(this.getCurrentSpeed() == 0){
-            this.clamp(Scania.ANGLE_MIN,Scania.ANGLE_MAX,angle);
-            container.adjustRamp(angle);
-            if(truckBedAngle > 0){
-                this.setMoveableF();
-            }else{
-                this.setMoveableT();
-            }
-        }else{
-            throw new IllegalArgumentException("Can't lower container while truck is moving");
-        }
     }
 
     protected void LoadTruck(Double x) {

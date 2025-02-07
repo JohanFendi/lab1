@@ -1,157 +1,116 @@
 
 import java.awt.*;
 
-abstract public class Vehicle implements Movable {
+abstract public class Vehicle {
 
     private static final String GAS_BREAK_AMOUNT_ERROR = "Method input must be between 0 and 1.";
-    //test
+    private static final int START_XVECTOR = 1;
+    private static final int START_YVECTOR = 0;
+    private static final double START_YPOS = 0;
+    private static final double START_XPOS = 0;
 
     private int nrDoors;
     private double enginePower;
     private Color color;
     private String modelName;
 
-    //Variables for movement and position.
+    //Movement variables
+    private Position position;
+    private Vector vector;
     private double currentSpeed;
-    private int xVector = 1;
-    private int yVector = 0;
-    private double xPos = 0;
-    private double yPos = 0;
-
 
     private boolean isMoveable;
 
-    public Vehicle (int nrDoors, Color color, double enginePower, String modelName){
+    public Vehicle(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
+        this.position = new Position(START_XPOS,START_YPOS);
+        this.vector = new Vector(START_XVECTOR,START_YVECTOR);
         stopEngine();
     }
 
-    protected double clamp(double minValue, double maxValue, double value){
+    protected double clamp(double minValue, double maxValue, double value) {
         if (value < minValue) value = minValue;
         if (value > maxValue) value = maxValue;
         return value;
     }
 
-
-    public void setMoveableT() {
-        isMoveable = true;
-    }
-
-    public void setMoveableF() {
-        isMoveable = false;
-    }
-
-    @Override
-    public void move(){
-        if(isMoveable) {
-            this.xPos += this.currentSpeed * this.xVector;
-            this.yPos += this.currentSpeed * this.yVector;
-        }
-    }
-
-    @Override
-    public void turnRight(){
-        if(isMoveable) {
-            int temp = this.yVector;
-            this.yVector = -this.xVector;
-            this.xVector = temp;
-        }
-    }
-
-    @Override
-    public void turnLeft(){
-        if(isMoveable) {
-            int temp = this.yVector;
-            this.yVector = this.xVector;
-            this.xVector = -temp;
-        }
-    }
-
-
-
-    public String getModelName(){
+    public String getModelName() {
         return this.modelName;
     }
 
-    public int getNrDoors(){
+    public int getNrDoors() {
         return nrDoors;
     }
 
-    public double getEnginePower(){
+    public double getEnginePower() {
         return enginePower;
     }
 
-    public double getCurrentSpeed(){
+    public double getCurrentSpeed() {
         return currentSpeed;
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(Color clr){
+    public void setColor(Color clr) {
         color = clr;
     }
 
-    public void startEngine(){
+    public void startEngine() {
         currentSpeed = 0.1;
     }
 
-    public void stopEngine(){
+    public void stopEngine() {
         currentSpeed = 0;
     }
 
     abstract protected double speedFactor();
 
-    protected void incrementSpeed(double amount){
+    protected void incrementSpeed(double amount) {
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
-    protected void decrementSpeed(double amount){
+    protected void decrementSpeed(double amount) {
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
-    public void gas(double amount){
-        if (amount < 0 || amount > 1){
+    public void setVector(Vector vector){
+       this.vector = vector;
+    }
+
+    public Vector getVector(){
+        return this.vector;
+    }
+
+    public void setPosition(Position position){
+        this.position = position;
+    }
+
+    public Position getPosition(){
+        return this.position;
+    }
+
+    public void gas(double amount) {
+        if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
 
         incrementSpeed(amount);
-        clamp(0.0,this.enginePower,currentSpeed);
+        clamp(0.0, this.enginePower, currentSpeed);
     }
 
-    public void brake(double amount){
-        if (amount < 0 || amount > 1){
+    public void brake(double amount) {
+        if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
         decrementSpeed(amount);
-        clamp(0.0,this.enginePower,currentSpeed);
+        clamp(0.0, this.enginePower, currentSpeed);
     }
-
-    public int getxVector(){
-        return this.xVector;
-    }
-
-    public int getyVector(){
-        return this.yVector;
-    }
-
-    public double getXPos() {
-        return this.xPos;
-    }
-
-    public double getYPos(){
-        return this.yPos;
-    }
-
-
-    //TODO kanske protected?
-    public void setXpos(double x) { this.xPos = x; }
-
-    public void setYpos(double y) { this.yPos = y; }
 }
 
 

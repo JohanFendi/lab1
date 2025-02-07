@@ -12,25 +12,26 @@ class Saab95Test {
     @BeforeEach
     void betweenTests(){
         this.saab = new Saab95(Color.black);
+
     }
 
 
     @Test
     void testStartVector(){
-        assertTrue(saab.getyVector() == 0 && saab.getxVector() == 1);
+        assertTrue(saab.getVector().getY() == 0 && saab.getVector().getX() == 1);
     }
 
     @Test
     void testTurnLeft90degrees(){
         saab.turnLeft();
-        assertTrue(saab.getyVector() == 1 && saab.getxVector() == 0);
+        assertTrue(saab.getVector().getY() == 1 && saab.getVector().getX() == 0);
     }
 
     @Test
     void testTurnLeft180degrees(){
         saab.turnLeft();
         saab.turnLeft();
-        assertTrue(saab.getyVector() == 0 && saab.getxVector() == -1);
+        assertTrue(saab.getVector().getY()== 0 && saab.getVector().getX() == -1);
     }
 
     @Test
@@ -38,7 +39,7 @@ class Saab95Test {
         saab.turnLeft();
         saab.turnLeft();
         saab.turnLeft();
-        assertTrue(saab.getyVector() == -1 && saab.getxVector() == 0);
+        assertTrue(saab.getVector().getY() == -1 && saab.getVector().getX() == 0);
     }
 
     @Test
@@ -47,20 +48,20 @@ class Saab95Test {
         saab.turnLeft();
         saab.turnLeft();
         saab.turnLeft();
-        assertTrue(saab.getyVector() == 0 && saab.getxVector() == 1);
+        assertTrue(saab.getVector().getY() == 0 && saab.getVector().getX() == 1);
     }
 
     @Test
     void testTurnRight90degrees(){
         saab.turnRight();
-        assertTrue(saab.getyVector() == -1 && saab.getxVector() == 0);
+        assertTrue(saab.getVector().getY() == -1 && saab.getVector().getX() == 0);
     }
 
     @Test
     void testTurnRight180degrees(){
         saab.turnRight();
         saab.turnRight();
-        assertTrue(saab.getyVector() == 0 && saab.getxVector() == -1);
+        assertTrue(saab.getVector().getY() == 0 && saab.getVector().getX() == -1);
     }
 
     @Test
@@ -68,7 +69,7 @@ class Saab95Test {
         saab.turnRight();
         saab.turnRight();
         saab.turnRight();
-        assertTrue(saab.getyVector() == 1 && saab.getxVector() == 0);
+        assertTrue(saab.getVector().getY() == 1 && saab.getVector().getX() == 0);
     }
 
     @Test
@@ -77,7 +78,7 @@ class Saab95Test {
         saab.turnRight();
         saab.turnRight();
         saab.turnRight();
-        assertTrue(saab.getyVector() == 0 && saab.getxVector() == 1);
+        assertTrue(saab.getVector().getY() == 0 && saab.getVector().getX() == 1);
     }
 
     @Test
@@ -86,7 +87,7 @@ class Saab95Test {
         saab.turnRight();
         saab.turnRight();
         saab.turnLeft();
-        assertTrue(saab.getyVector() == -1 && saab.getxVector() == 0);
+        assertTrue(saab.getVector().getY() == -1 && saab.getVector().getX() == 0);
     }
 
     @Test
@@ -96,7 +97,7 @@ class Saab95Test {
         saab.move();
         saab.turnLeft();
         saab.move();
-        assertEquals(saab.getXPos(), saab.getYPos());
+        assertEquals(saab.getPosition().getX(), saab.getPosition().getY());
     }
 
     @Test
@@ -108,7 +109,7 @@ class Saab95Test {
         saab.move();
         saab.turnLeft();
         saab.move();
-        assertEquals(saab.getXPos(), saab.getYPos());
+        assertEquals(saab.getPosition().getX(), saab.getPosition().getY());
     }
 
     @Test
@@ -152,12 +153,12 @@ class Saab95Test {
 
     @Test
     void getXPos() {
-        assertEquals(saab.getXPos(), 0);
+        assertEquals(saab.getPosition().getX(), 0);
     }
 
     @Test
     void getYPos() {
-        assertEquals(saab.getYPos(), 0);
+        assertEquals(saab.getPosition().getX(), 0);
     }
 
     @Test

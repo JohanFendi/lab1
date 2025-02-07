@@ -47,11 +47,12 @@ public class FlatBedTruck extends Vehicle{
 
 
     private boolean isWithinRadius (Car car) {
-        double carX = car.getXPos();
-        double carY = car.getYPos();
-        double truckX = this.getXPos();
-        double truckY = this.getYPos();
-        double distance = Math.hypot(carX - truckX, carY - truckY);
+        Vector carVector = car.getVector();
+        Position carPosition = car.getPosition();
+        Vector truckVector = this.getVector();
+        Position truckPosition = this.getPosition();
+        double distance = Math.hypot(carPosition.getX()- truckPosition.getX(),
+                                    carPosition.getY() - truckPosition.getY());
         return distance <= FlatBedTruck.MAX_LOADING_RADIUS;
     }
 }
