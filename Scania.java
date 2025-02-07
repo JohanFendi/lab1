@@ -10,7 +10,7 @@ public class Scania extends Vehicle {
     private static final double ANGLE_MIN = 0;
 
     private double truckBedAngle = 0.0;
-    private double maxAngle = 70;
+
 
     Container container;
 

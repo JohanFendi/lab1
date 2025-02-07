@@ -3,12 +3,13 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Stack;
 
-public class FlatBedTruck extends Vehicle implements Truck {
+public class FlatBedTruck extends Vehicle{
 
     private static final int NR_DOORS = 2;
     private static final int ENGINE_POWER = 75;
     private static final String MODEL_NAME = "FlatBedTruck";
     private static final int FLATBED_MAXCAPACITY = 10;
+    private static final double MAX_LOADING_RADIUS = 1;
 
     private final Deque<Car> flatbed;
     private double currentFlatBedAngle = 0.0;
@@ -46,46 +47,11 @@ public class FlatBedTruck extends Vehicle implements Truck {
 
 
     private boolean isWithinRadius (Car car) {
-        double radius = 1;
         double carX = car.getXPos();
         double carY = car.getYPos();
         double truckX = this.getXPos();
         double truckY = this.getYPos();
-
         double distance = Math.hypot(carX - truckX, carY - truckY);
-
-        return distance <= radius;
+        return distance <= FlatBedTruck.MAX_LOADING_RADIUS;
     }
-
-
-
-
-    protected void LoadTruck(Car car) {
-        if(currentFlatBedAngle == maxFlatBedAngle && isWithinRadius(car) && flatbed.size() < FLATBED_MAXCAPACITY) {
-            car.setXpos(this.getXPos());
-            car.setYpos(this.getYPos());
-            flatbed.push(car);
-        }
-    }
-
-
-    protected Car unLoadTruck() {
-        double truckX = this.getXPos();
-        double truckY = this.getYPos();
-
-        if(currentFlatBedAngle != maxFlatBedAngle) {
-            throw new IllegalArgumentException("Cannot unload car while ramp is up");
-        }
-        Car unloadedCar = flatbed.pop();
-        unloadedCar.setXpos(truckX + 1);
-        unloadedCar.setYpos(truckY);
-
-        return unloadedCar;
-    }
-
-
-
-    // TODO: implementera att alla bilars position som är lastade på transporten uppdateras med lastbilens position
-
-
 }
