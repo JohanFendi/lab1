@@ -1,55 +1,30 @@
 import java.security.PublicKey;
 import java.util.ArrayList;
 
-public class Container {
+public class Container<T> {
 
-    private ArrayList<Double> container;
-    private final int CONTAINER_MAXCAPACITY = 10;
-    private double CURRENT_ANGLE = 0;
-    private boolean IS_CONTAINER_DOWN = true;
+    private double maxVolume;
+    private double currentVolume = 0;
 
-    public Container() {
-        this.container = new ArrayList<>(CONTAINER_MAXCAPACITY);
+    public Container(double maxVolume) {
+        this.maxVolume = maxVolume;
     }
 
-
-
-    public boolean isFlakUp() {
-        return this.IS_CONTAINER_DOWN;
+    public double loadVolume(T obj, double volumeToAdd){
+        double overflow = 0;
+        if (this.currentVolume + volumeToAdd > this.maxVolume){
+            this.currentVolume = maxVolume;
+            overflow = this.currentVolume + volumeToAdd - this.maxVolume;
+        }
+        return overflow;
     }
 
-    public void setFlakUp() {
-        this.IS_CONTAINER_DOWN = true;
+    public double unloadVolume(T obj, double volumeToUnload) {
+        double unloadedVolume = volumeToUnload;
+        if (this.currentVolume >= volumeToUnload) {
+            unloadedVolume = this.currentVolume;
+            this.currentVolume = 0;
+        }
+        return unloadedVolume;
     }
-
-    public void setFlakDown() {
-        this.CURRENT_ANGLE = 0;
-        this.IS_CONTAINER_DOWN = false;
-        // TODO biltransporten måste stå stilla för att sänka den
-    }
-
-    public void adjustRamp(double angle){
-        this.CURRENT_ANGLE = angle;
-    }
-
-
-
-
-
-/*
-    private boolean isLoadable;
-
-    abstract protected void adjustRamp(double angle);
-
-    abstract protected void LoadTruck(T x);
-
-    abstract protected T unLoadTruck();
-
- */
-
-
-
-
-
-
 }
