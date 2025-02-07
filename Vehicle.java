@@ -19,6 +19,8 @@ abstract public class Vehicle implements Movable {
     private double yPos = 0;
 
 
+    private boolean isMoveable;
+
     public Vehicle (int nrDoors, Color color, double enginePower, String modelName){
         this.nrDoors = nrDoors;
         this.color = color;
@@ -33,25 +35,42 @@ abstract public class Vehicle implements Movable {
         return value;
     }
 
+
+    public void setMoveableT() {
+        isMoveable = true;
+    }
+
+    public void setMoveableF() {
+        isMoveable = false;
+    }
+
     @Override
     public void move(){
-        this.xPos += this.currentSpeed * this.xVector;
-        this.yPos += this.currentSpeed * this.yVector;
+        if(isMoveable) {
+            this.xPos += this.currentSpeed * this.xVector;
+            this.yPos += this.currentSpeed * this.yVector;
+        }
     }
 
     @Override
     public void turnRight(){
-        int temp = this.yVector;
-        this.yVector = -this.xVector;
-        this.xVector = temp;
+        if(isMoveable) {
+            int temp = this.yVector;
+            this.yVector = -this.xVector;
+            this.xVector = temp;
+        }
     }
 
     @Override
     public void turnLeft(){
-        int temp = this.yVector;
-        this.yVector = this.xVector;
-        this.xVector = -temp;
+        if(isMoveable) {
+            int temp = this.yVector;
+            this.yVector = this.xVector;
+            this.xVector = -temp;
+        }
     }
+
+
 
     public String getModelName(){
         return this.modelName;

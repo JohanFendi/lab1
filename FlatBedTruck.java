@@ -3,7 +3,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Stack;
 
-public class FlatBedTruck extends Truck<Car> {
+public class FlatBedTruck extends Vehicle implements Truck {
 
     private static final int NR_DOORS = 2;
     private static final int ENGINE_POWER = 75;
@@ -14,8 +14,6 @@ public class FlatBedTruck extends Truck<Car> {
     private double currentFlatBedAngle = 0.0;
     private double maxFlatBedAngle = 70;
     // TODO kanske private double minFlatBedAngle = 0;?
-    //private boolean flatBedOpen = false;
-    //private boolean flatBedClosed = true;
 
 
     public FlatBedTruck(Color color){
@@ -23,16 +21,6 @@ public class FlatBedTruck extends Truck<Car> {
         this.flatbed = new ArrayDeque<>(FLATBED_MAXCAPACITY);
 
     }
-/*
-    public void openFlatBed() {
-        this.flatBedOpen = true;
-        this.flatBedClosed = false;
-    }
-    public void closeFlatBed() {
-        this.flatBedOpen = false;
-        this.flatBedClosed = true;
-    }
- */
 
 
 
@@ -52,15 +40,11 @@ public class FlatBedTruck extends Truck<Car> {
         return getEnginePower() * 0.01;
     }
 
-
-    // TODO onödig kodduplicering? kan fucka med vinklarna, om man använder denna istället för openRamp eller closeRamp?
-    @Override
     protected void adjustRamp(double angle) {
         this.currentFlatBedAngle = clamp(0, maxFlatBedAngle, angle);
     }
 
 
-    // TODO kanske flytta till Vehicle?
     private boolean isWithinRadius (Car car) {
         double radius = 1;
         double carX = car.getXPos();
@@ -75,7 +59,7 @@ public class FlatBedTruck extends Truck<Car> {
 
 
 
-    @Override
+
     protected void LoadTruck(Car car) {
         if(currentFlatBedAngle == maxFlatBedAngle && isWithinRadius(car) && flatbed.size() < FLATBED_MAXCAPACITY) {
             car.setXpos(this.getXPos());
@@ -84,7 +68,7 @@ public class FlatBedTruck extends Truck<Car> {
         }
     }
 
-    @Override
+
     protected Car unLoadTruck() {
         double truckX = this.getXPos();
         double truckY = this.getYPos();
