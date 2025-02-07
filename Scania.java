@@ -1,6 +1,6 @@
 import java.awt.*;
                     //TODO satte "Double" tillfälligt
-public class Scania extends Truck<Double> {
+public class Scania extends Vehicle implements Truck {
 
 
     private static final int NR_DOORS = 2;
@@ -10,8 +10,11 @@ public class Scania extends Truck<Double> {
     private double truckBedAngle = 0.0;
     private double maxAngle = 70;
 
+    Container container;
+
     public Scania(Color color){
         super(Scania.NR_DOORS, color, Scania.ENGINE_POWER, Scania.MODEL_NAME);
+        this.container = new Container();
     }
 
 
