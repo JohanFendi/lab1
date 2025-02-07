@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Volvo240 extends Car{
+public class Volvo240 extends Car {
 
     private static final int NR_DOORS = 4;
     private static final int ENGINE_POWER = 100;

@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.Deque;
 
 public class Flak <Car> {
 
-    private ArrayList<Car> flak;
+    private final ArrayList<Car> flak;
     private final int FLAK_MAXCAPACITY = 10;
     private boolean isFlakUp = false;
 
@@ -24,6 +25,12 @@ public class Flak <Car> {
         this.isFlakUp = false;
         // TODO biltransporten måste stå stilla för att sänka den
     }
+
+
+
+
+
+
 
 
 
