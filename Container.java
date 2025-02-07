@@ -30,7 +30,7 @@ public class Container {
         // TODO biltransporten måste stå stilla för att sänka den
     }
 
-    public void adjustRamp(double angle){
+    public void adjustRamp2(double angle){
         this.CURRENT_ANGLE = angle;
     }
 
