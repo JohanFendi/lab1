@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class Flatbed<T> {
@@ -18,7 +19,7 @@ public class Flatbed<T> {
         return true;
     }
 
-    public T loadObject(){
+    public T unLoadObject(){
         if (this.storage.isEmpty()){
             return null;
         }
@@ -28,4 +29,11 @@ public class Flatbed<T> {
     private boolean isFull(){
         return this.storage.size() >= maxCapacity;
     }
+
+    // Kopierar stacken till en lista vi kan iterera över i FlatBedTruck-klassen
+    public List<T> getLoadedCars() {
+        return new ArrayList<>(this.storage);
+    }
+
+
 }

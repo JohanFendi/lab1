@@ -53,6 +53,10 @@ abstract public class Vehicle {
         return currentSpeed;
     }
 
+    protected void setCurrentSpeed(double speed) {
+        this.currentSpeed = speed;
+    }
+
     public Color getColor() {
         return color;
     }
@@ -99,9 +103,8 @@ abstract public class Vehicle {
         if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
-
         incrementSpeed(amount);
-        clamp(0.0, this.enginePower, currentSpeed);
+        this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
     }
 
     public void brake(double amount) {
@@ -109,7 +112,7 @@ abstract public class Vehicle {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
         decrementSpeed(amount);
-        clamp(0.0, this.enginePower, currentSpeed);
+        this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
     }
 }
 
