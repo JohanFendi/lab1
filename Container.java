@@ -1,7 +1,7 @@
 import java.security.PublicKey;
 import java.util.ArrayList;
 
-public class Container<T> {
+public class Container {
 
     private double maxVolume;
     private double currentVolume = 0;
@@ -10,10 +10,7 @@ public class Container<T> {
         this.maxVolume = maxVolume;
     }
 
-
-
-
-    public double loadVolume(T obj, double volumeToAdd){
+    public double loadVolume(double volumeToAdd){
         double overflow = 0;
         if (this.currentVolume + volumeToAdd > this.maxVolume){
             this.currentVolume = maxVolume;
@@ -22,7 +19,7 @@ public class Container<T> {
         return overflow;
     }
 
-    public double unloadVolume(T obj, double volumeToUnload) {
+    public double unloadVolume(double volumeToUnload) {
         double unloadedVolume = volumeToUnload;
         if (this.currentVolume >= volumeToUnload) {
             unloadedVolume = this.currentVolume;
