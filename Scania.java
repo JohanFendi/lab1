@@ -43,6 +43,16 @@ public class Scania extends Vehicle implements Movable{
         setCurrentSpeed(clamp(0.0, this.getEnginePower(), this.getCurrentSpeed()));
     }
 
+    public double loadContainer(double volume){
+        double overflow = this.container.load(volume);
+        return overflow;
+    }
+
+    public double unloadContainer(double volume){
+
+        return this.container.unload(volume);
+    }
+
     public double getRampAngle() {
         return rampAngle;
     }

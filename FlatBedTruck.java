@@ -12,10 +12,8 @@ public class FlatBedTruck extends Vehicle implements Movable {
     private static final double MAX_LOADING_RADIUS = 1;
     private static final double UNLOAD_OFFSET = 1;
 
-
     private boolean isRampUp = true;
     private final Flatbed<Car> flatBed;
-
 
     public FlatBedTruck(Color color) {
         super(FlatBedTruck.NR_DOORS, color, FlatBedTruck.ENGINE_POWER, FlatBedTruck.MODEL_NAME);
