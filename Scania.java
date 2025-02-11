@@ -14,7 +14,6 @@ public class Scania extends Vehicle implements Movable{
 
     public Scania(Color color, double containerVolume) {
         super(Scania.NR_DOORS, color, Scania.ENGINE_POWER, Scania.MODEL_NAME);
-
         this.container = new Container(containerVolume);
     }
 

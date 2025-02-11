@@ -8,7 +8,6 @@ import java.awt.*;
 
 class CarRepairShopTest {
 
-
     @Test
     void addingCarTwiceReturnsMinusOne(){
         CarRepairShop<Car> shop = new CarRepairShop<>(10);

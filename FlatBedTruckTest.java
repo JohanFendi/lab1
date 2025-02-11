@@ -4,11 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FlatBedTruckTest {
 
-
-
-
-
-
     @Test
     void loadFlatBed() {
     }

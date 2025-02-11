@@ -53,10 +53,10 @@ class ScaniaTest {
 
     @Test
     void notMoveWhileRampIsUp() {
-        Position beforeMove = scaniaObj.getPosition();
+        Position beforeMove = scaniaObj.getMovementObj().getPosition();
         scaniaObj.adjustRamp(40);
         scaniaObj.move();
-        assertEquals(beforeMove, scaniaObj.getPosition());
+        assertEquals(beforeMove, scaniaObj.getMovementObj().getPosition());
     }
 
     @Test
