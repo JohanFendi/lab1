@@ -26,12 +26,16 @@ public class Scania extends Vehicle implements Movable{
 
     @Override
     public void turnLeft(){
-        this.getMovementObj().turnLeft();
+        if (isMovable()) {
+            this.getMovementObj().turnLeft();
+        }
     }
 
     @Override
     public void turnRight(){
-        this.getMovementObj().turnRight();
+        if (isMovable()) {
+            this.getMovementObj().turnRight();
+        }
     }
 
     @Override

@@ -8,7 +8,6 @@ import java.awt.*;
 class Saab95Test {
 
     private Saab95 saab;
-    private MovementObj saabMovementObj;
     private Vector saabVector;
     private Position saabPosition;
 
@@ -16,8 +15,8 @@ class Saab95Test {
     void betweenTests(){
         this.saab = new Saab95(Color.black);
         MovementObj saabMovementObj = saab.getMovementObj();
-        Vector saabVector = saabMovementObj.getVector();
-        Position saabPosition = saab.getMovementObj().getPosition();
+        saabVector = saabMovementObj.getVector();
+        saabPosition = saab.getMovementObj().getPosition();
 
     }
 
@@ -89,16 +88,16 @@ class Saab95Test {
 
     @Test
     void testTurnRight180degreesLeft90degrees(){
-        Saab95 saab = new Saab95(Color.black);
         saab.turnRight();
         saab.turnRight();
         saab.turnLeft();
         assertTrue(saabVector.getY() == -1 && saabVector.getX() == 0);
+
     }
 
     @Test
     void testMoveForwardXmToLeftXm(){
-        Saab95 saab = new Saab95(Color.black);
+
         saab.gas(0.5);
         saab.move();
         saab.turnLeft();
@@ -108,7 +107,7 @@ class Saab95Test {
 
     @Test
     void testMoveBackwardsXmToLeftXm(){
-        Saab95 saab = new Saab95(Color.black);
+
         saab.turnRight();
         saab.turnRight();
         saab.gas(0.5);

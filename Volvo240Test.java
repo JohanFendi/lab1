@@ -16,8 +16,8 @@ class Volvo240Test {
     void betweenTests(){
         this.volvo240 = new Volvo240(Color.black);
         MovementObj volvoMovmentObj = volvo240.getMovementObj();
-        Vector volvoVector = volvoMovmentObj.getVector();
-        Position volvoPosition = volvo240.getMovementObj().getPosition();
+        volvoVector = volvoMovmentObj.getVector();
+        volvoPosition = volvo240.getMovementObj().getPosition();
 
 
     }
