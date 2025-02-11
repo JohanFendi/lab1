@@ -8,34 +8,39 @@ import static org.junit.jupiter.api.Assertions.*;
 class Volvo240Test {
 
     private Volvo240 volvo240;
-    private Saab95 saab95;
+    private MovementObj volvoMovmentObj;
+    private Vector volvoVector;
+    private Position volvoPosition;
 
     @BeforeEach
     void betweenTests(){
-        volvo240 = new Volvo240(Color.black);
-        saab95 = new Saab95(Color.BLUE);
+        this.volvo240 = new Volvo240(Color.black);
+        MovementObj volvoMovmentObj = volvo240.getMovementObj();
+        Vector volvoVector = volvoMovmentObj.getVector();
+        Position volvoPosition = volvo240.getMovementObj().getPosition();
+
 
     }
 
     @Test
     void testStartVector(){
-        assertEquals(1, volvo240.getVector().getX());
-        assertEquals(0, volvo240.getVector().getY());
+        assertEquals(1, volvoVector.getX());
+        assertEquals(0, volvoVector.getY());
     }
 
     @Test
     void testTurnLeft90degrees(){
         volvo240.turnLeft();
-        assertEquals(0.0, volvo240.getVector().getX(), 1e-10);
-        assertEquals(1, volvo240.getVector().getY());
+        assertEquals(0.0, volvoVector.getX(), 1e-10);
+        assertEquals(1, volvoVector.getY());
     }
 
     @Test
     void testTurnLeft180degrees(){
         volvo240.turnLeft();
         volvo240.turnLeft();
-        assertEquals(-1, volvo240.getVector().getX());
-        assertEquals(0.0, volvo240.getVector().getY(), 1e-10);
+        assertEquals(-1, volvoVector.getX());
+        assertEquals(0.0, volvoVector.getY(), 1e-10);
     }
 
     @Test
@@ -43,8 +48,8 @@ class Volvo240Test {
         volvo240.turnLeft();
         volvo240.turnLeft();
         volvo240.turnLeft();
-        assertEquals(0, volvo240.getVector().getX());
-        assertEquals(-1, volvo240.getVector().getY());
+        assertEquals(0, volvoVector.getX());
+        assertEquals(-1, volvoVector.getY());
     }
 
     @Test
@@ -53,23 +58,23 @@ class Volvo240Test {
         volvo240.turnLeft();
         volvo240.turnLeft();
         volvo240.turnLeft();
-        assertEquals(1, volvo240.getVector().getX());
-        assertEquals(0, volvo240.getVector().getY());
+        assertEquals(1, volvoVector.getX());
+        assertEquals(0, volvoVector.getY());
     }
 
     @Test
     void testTurnRight90degrees(){
         volvo240.turnRight();
-        assertEquals(0, volvo240.getVector().getX());
-        assertEquals(-1, volvo240.getVector().getY());
+        assertEquals(0, volvoVector.getX());
+        assertEquals(-1, volvoVector.getY());
     }
 
     @Test
     void testTurnRight180degrees(){
         volvo240.turnRight();
         volvo240.turnRight();
-        assertEquals(-1, volvo240.getVector().getX());
-        assertEquals(0.0, volvo240.getVector().getY(), 1e-10);
+        assertEquals(-1, volvoVector.getX());
+        assertEquals(0.0, volvoVector.getY(), 1e-10);
     }
 
     @Test
@@ -77,8 +82,8 @@ class Volvo240Test {
         volvo240.turnRight();
         volvo240.turnRight();
         volvo240.turnRight();
-        assertEquals(0.0, volvo240.getVector().getX(),1e-10);
-        assertEquals(1, volvo240.getVector().getY());
+        assertEquals(0.0, volvoVector.getX(),1e-10);
+        assertEquals(1, volvoVector.getY());
     }
 
     @Test
@@ -87,38 +92,38 @@ class Volvo240Test {
         volvo240.turnRight();
         volvo240.turnRight();
         volvo240.turnRight();
-        assertEquals(1, volvo240.getVector().getX());
-        assertEquals(0, volvo240.getVector().getY());
+        assertEquals(1, volvoVector.getX());
+        assertEquals(0, volvoVector.getY());
     }
 
     @Test
     void testTurnRight180degreesLeft90degrees(){
-        saab95.turnRight();
-        saab95.turnRight();
-        saab95.turnLeft();
-        assertEquals(0, saab95.getVector().getX());
-        assertEquals(-1, saab95.getVector().getY());
+        volvo240.turnRight();
+        volvo240.turnRight();
+        volvo240.turnLeft();
+        assertEquals(0, volvoVector.getX());
+        assertEquals(-1, volvoVector.getY());
     }
 
 
     @Test
     void testMoveForwardXmToLeftXm(){
-        saab95.gas(0.5);
-        saab95.move();
-        saab95.turnLeft();
-        saab95.move();
-        assertEquals(saab95.getPosition().getX(), saab95.getPosition().getY());
+        volvo240.gas(0.5);
+        volvo240.move();
+        volvo240.turnLeft();
+        volvo240.move();
+        assertEquals(volvoPosition.getX(), volvoPosition.getY());
     }
 
     @Test
     void testMoveBackwardsXmToLeftXm(){
-        saab95.turnRight();
-        saab95.turnRight();
-        saab95.gas(0.5);
-        saab95.move();
-        saab95.turnLeft();
-        saab95.move();
-        assertEquals(saab95.getPosition().getX(), saab95.getPosition().getY());
+        volvo240.turnRight();
+        volvo240.turnRight();
+        volvo240.gas(0.5);
+        volvo240.move();
+        volvo240.turnLeft();
+        volvo240.move();
+        assertEquals(volvoPosition.getX(), volvoPosition.getY());
     }
 
     @Test
@@ -156,12 +161,12 @@ class Volvo240Test {
 
     @Test
     void getXPos() {
-        assertEquals(volvo240.getPosition().getX(), 0);
+        assertEquals(volvoPosition.getX(), 0);
     }
 
     @Test
     void getYPos() {
-        assertEquals(volvo240.getPosition().getY(), 0);
+        assertEquals(volvoPosition.getY(), 0);
     }
 
     @Test
