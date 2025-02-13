@@ -35,5 +35,8 @@ public class Flatbed<T> {
         return new ArrayList<>(this.storage);
     }
 
+    public int size(){
+        return this.storage.size();
+    }
 
 }
