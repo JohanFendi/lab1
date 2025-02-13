@@ -9,29 +9,26 @@ abstract public class Vehicle {
     private static final double START_YPOS = 0;
     private static final double START_XPOS = 0;
 
-    private int nrDoors;
-    private double enginePower;
+    private final int nrDoors;
+    private final double enginePower;
     private Color color;
-    private String modelName;
+    private final String modelName;
 
     //Movement variables
-    private Position position;
-    private Vector vector;
+    private MovementObj movementObj;
     private double currentSpeed;
-
-    private boolean isMoveable;
 
     public Vehicle(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
-        this.position = new Position(START_XPOS,START_YPOS);
-        this.vector = new Vector(START_XVECTOR,START_YVECTOR);
+        this.movementObj = new MovementObj(new Vector(START_XVECTOR, START_YVECTOR),
+                                            new Position(START_XPOS, START_YPOS));
         stopEngine();
     }
 
-    protected double clamp(double minValue, double maxValue, double value) {
+    protected static double clamp(double minValue, double maxValue, double value) {
         if (value < minValue) value = minValue;
         if (value > maxValue) value = maxValue;
         return value;
@@ -51,6 +48,10 @@ abstract public class Vehicle {
 
     public double getCurrentSpeed() {
         return currentSpeed;
+    }
+
+    protected void setCurrentSpeed(double speed) {
+        this.currentSpeed = speed;
     }
 
     public Color getColor() {
@@ -79,29 +80,20 @@ abstract public class Vehicle {
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
-    public void setVector(Vector vector){
-       this.vector = vector;
+    public MovementObj getMovementObj(){
+        return this.movementObj;
     }
 
-    public Vector getVector(){
-        return this.vector;
-    }
-
-    public void setPosition(Position position){
-        this.position = position;
-    }
-
-    public Position getPosition(){
-        return this.position;
+    public void setMovementObj(MovementObj movementObj){
+        this.movementObj = movementObj;
     }
 
     public void gas(double amount) {
         if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
-
         incrementSpeed(amount);
-        clamp(0.0, this.enginePower, currentSpeed);
+        this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
     }
 
     public void brake(double amount) {
@@ -109,8 +101,10 @@ abstract public class Vehicle {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
         decrementSpeed(amount);
-        clamp(0.0, this.enginePower, currentSpeed);
+        this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
     }
+
+
 }
 
 

@@ -1,8 +1,9 @@
 import java.security.PublicKey;
 import java.util.ArrayList;
 
-public class Container<T> {
+public class Container {
 
+    private static final String NEGATIVE_ARGUMENT_ERROR = "NegativeVolumeException: volume cannot be negative.";
     private double maxVolume;
     private double currentVolume = 0;
 
@@ -10,7 +11,14 @@ public class Container<T> {
         this.maxVolume = maxVolume;
     }
 
-    public double loadVolume(T obj, double volumeToAdd){
+    public double getAvailableVolume(){
+        return this.maxVolume - this.currentVolume;
+    }
+
+    public double load(double volumeToAdd){
+        if (volumeToAdd < 0){
+            throw new IllegalArgumentException(NEGATIVE_ARGUMENT_ERROR);
+        }
         double overflow = 0;
         if (this.currentVolume + volumeToAdd > this.maxVolume){
             this.currentVolume = maxVolume;
@@ -19,7 +27,10 @@ public class Container<T> {
         return overflow;
     }
 
-    public double unloadVolume(T obj, double volumeToUnload) {
+    public double unload(double volumeToUnload) {
+        if (volumeToUnload < 0){
+            throw new IllegalArgumentException(NEGATIVE_ARGUMENT_ERROR);
+        }
         double unloadedVolume = volumeToUnload;
         if (this.currentVolume >= volumeToUnload) {
             unloadedVolume = this.currentVolume;
