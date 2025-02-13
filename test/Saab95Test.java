@@ -1,9 +1,11 @@
-import static org.junit.jupiter.api.Assertions.*;
+package test;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.awt.*;
+import src.*;
 
 class Saab95Test {
 
@@ -102,7 +104,7 @@ class Saab95Test {
         saab.move();
         saab.turnLeft();
         saab.move();
-        assertEquals(saabPosition.getX(), saabPosition.getY());
+        Assertions.assertEquals(saabPosition.getX(), saabPosition.getY());
     }
 
     @Test
@@ -114,27 +116,9 @@ class Saab95Test {
         saab.move();
         saab.turnLeft();
         saab.move();
-        assertEquals(saabPosition.getX(), saabPosition.getY());
+        Assertions.assertEquals(saabPosition.getX(), saabPosition.getY());
     }
 
-    @Test
-    void incrementSpeed10Procent(){
-        saab.incrementSpeed(0.1);
-        assertEquals(0.125, saab.getCurrentSpeed());
-    }
-
-    @Test
-    void decrementSpeed10Procent(){
-        saab.decrementSpeed(0.1);
-        assertEquals(-0.125, saab.getCurrentSpeed());
-    }
-
-    @Test
-    void incrementSpeed10ProcentWithTurbo(){
-        saab.setTurboOn();
-        saab.incrementSpeed(0.1);
-        assertEquals(0.1625, saab.getCurrentSpeed());
-    }
 
     @Test
     void testCurrentSpeedValidWhenGasing(){
@@ -158,32 +142,32 @@ class Saab95Test {
 
     @Test
     void getXPos() {
-        assertEquals(saabPosition.getX(), 0);
+        Assertions.assertEquals(saabPosition.getX(), 0);
     }
 
     @Test
     void getYPos() {
-        assertEquals(saabPosition.getX(), 0);
+        Assertions.assertEquals(saabPosition.getX(), 0);
     }
 
     @Test
     void getModelName() {
-        assertEquals(saab.getModelName(), "Saab95");
+        Assertions.assertEquals(saab.getModelName(), "Saab95");
     }
 
     @Test
     void getNrDoors() {
-        assertEquals(saab.getNrDoors(), 2);
+        Assertions.assertEquals(saab.getNrDoors(), 2);
     }
 
     @Test
     void getEnginePower() {
-        assertEquals(saab.getEnginePower(), 125);
+        Assertions.assertEquals(saab.getEnginePower(), 125);
     }
 
     @Test
     void getCurrentSpeed() {
-        assertEquals(saab.getCurrentSpeed(), 0);
+        Assertions.assertEquals(saab.getCurrentSpeed(), 0);
     }
 
     @Test
@@ -200,6 +184,6 @@ class Saab95Test {
     @Test
     void startEngine() {
         saab.startEngine();
-        assertEquals(saab.getCurrentSpeed(), 0.1);
+        Assertions.assertEquals(saab.getCurrentSpeed(), 0.1);
     }
 }

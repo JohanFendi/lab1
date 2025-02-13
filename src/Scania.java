@@ -1,3 +1,5 @@
+package src;
+
 import java.awt.*;
 
 public class Scania extends Vehicle implements Movable{
@@ -10,7 +12,7 @@ public class Scania extends Vehicle implements Movable{
     private static final double ANGLE_MIN = 0;
 
     private double rampAngle = 0.0;
-    private final Container container;
+    private final src.Container container;
 
     public Scania(Color color, double containerVolume) {
         super(Scania.NR_DOORS, color, Scania.ENGINE_POWER, Scania.MODEL_NAME);
@@ -74,7 +76,7 @@ public class Scania extends Vehicle implements Movable{
         return rampAngle == 0;
     }
 
-    protected boolean adjustRamp(double angle) {
+    public boolean adjustRamp(double angle) {
         if (this.isRampAdjustable()) {
             rampAngle = clamp(ANGLE_MIN, ANGLE_MAX, angle);
             return true;

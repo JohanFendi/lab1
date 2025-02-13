@@ -1,3 +1,5 @@
+package src;
+
 public class MovementObj {
 
     private Vector vector;

@@ -1,8 +1,10 @@
+package test;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.awt.*;
-
+import src.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScaniaTest {
@@ -20,29 +22,29 @@ class ScaniaTest {
     @Test
     void adjustRampAngleOver70Degrees() {
         scaniaObj.adjustRamp(100);
-        assertEquals(70, scaniaObj.getRampAngle());
+        Assertions.assertEquals(70, scaniaObj.getRampAngle());
     }
 
     @Test
     void adjustRampAngleUnder0Degrees() {
         scaniaObj.adjustRamp(-10);
-        assertEquals(0, scaniaObj.getRampAngle());
+        Assertions.assertEquals(0, scaniaObj.getRampAngle());
     }
 
 
     @Test
     void adjustRampScaniaNotMoving() {
-        assertTrue(scaniaObj.adjustRamp(10));
+        Assertions.assertTrue(scaniaObj.adjustRamp(10));
     }
 
 
     @Test
     void adjustRampScaniaIsMoving() {
         scaniaObj.gas(0.5);
-        assertFalse(scaniaObj.adjustRamp(10));
+        Assertions.assertFalse(scaniaObj.adjustRamp(10));
 
         // Kollar så att vinkeln på rampen inte har ändrats
-        assertEquals(0.0, scaniaObj.getRampAngle(), 1e-10);
+        Assertions.assertEquals(0.0, scaniaObj.getRampAngle(), 1e-10);
     }
 
 
@@ -56,7 +58,7 @@ class ScaniaTest {
         Position beforeMove = scaniaObj.getMovementObj().getPosition();
         scaniaObj.adjustRamp(40);
         scaniaObj.move();
-        assertEquals(beforeMove, scaniaObj.getMovementObj().getPosition());
+        Assertions.assertEquals(beforeMove, scaniaObj.getMovementObj().getPosition());
     }
 
     @Test
@@ -69,7 +71,7 @@ class ScaniaTest {
     @Test
     void getRampAngle() {
         scaniaObj.adjustRamp(60);
-        assertEquals(60, scaniaObj.getRampAngle());
+        Assertions.assertEquals(60, scaniaObj.getRampAngle());
     }
 
 

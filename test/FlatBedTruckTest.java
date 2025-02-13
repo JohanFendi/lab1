@@ -1,9 +1,11 @@
+package test;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.awt.*;
-
 import static org.junit.jupiter.api.Assertions.*;
+import src.*;
 
 class FlatBedTruckTest {
 
@@ -50,7 +52,7 @@ class FlatBedTruckTest {
         flatBedTruckObj.move();
         flatBedTruckObj.turnLeft();
         flatBedTruckObj.move();
-        assertEquals(flatBedPosition.getX(), flatBedPosition.getY());
+        Assertions.assertEquals(flatBedPosition.getX(), flatBedPosition.getY());
     }
 
     /*

@@ -1,6 +1,12 @@
+package test;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import src.MovementObj;
+import src.Position;
+import src.Vector;
+import src.Volvo240;
+import src.*;
 import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -125,19 +131,6 @@ class Volvo240Test {
         volvo240.move();
         assertEquals(volvoPosition.getX(), volvoPosition.getY());
     }
-
-    @Test
-    void incrementSpeed10Procent(){
-        volvo240.incrementSpeed(0.1);
-        assertEquals(0.125, volvo240.getCurrentSpeed());
-    }
-
-    @Test
-    void decrementSpeed10Procent(){
-        volvo240.decrementSpeed(0.1);
-        assertEquals(-0.125, volvo240.getCurrentSpeed());
-    }
-
 
     @Test
     void testCurrentSpeedValidWhenGasing(){

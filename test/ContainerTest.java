@@ -1,7 +1,10 @@
+package test;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+import src.*;
 
 class ContainerTest {
 
@@ -15,14 +18,14 @@ class ContainerTest {
 
     @Test
     void availableUnloadedVolumeEqualsMaxVolume(){
-        assertEquals(10.0, this.c.getAvailableVolume());
+        Assertions.assertEquals(10.0, this.c.getAvailableVolume());
     }
 
     @Test
     void loading7unitsResultsIN3Available(){
         this.c.load(3);
         this.c.load(4);
-        assertEquals(3, this.c.getAvailableVolume());
+        Assertions.assertEquals(3, this.c.getAvailableVolume());
     }
 
     @Test
@@ -55,6 +58,6 @@ class ContainerTest {
     void unloadingLessThanAvailableGivesCorrectAvailableVolume(){
         this.c.load(7);
         this.c.unload(3);
-        assertEquals(4, this.c.getAvailableVolume());
+        Assertions.assertEquals(4, this.c.getAvailableVolume());
     }
 }

@@ -1,3 +1,5 @@
+package src;
+
 public class Position {
     private double x;
     private double y;

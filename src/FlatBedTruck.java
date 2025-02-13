@@ -1,7 +1,6 @@
+package src;
+
 import java.awt.*;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Stack;
 
 public class FlatBedTruck extends Vehicle implements Movable {
 
