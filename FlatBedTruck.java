@@ -50,12 +50,12 @@ public class FlatBedTruck extends Vehicle implements Movable {
 
     @Override
     public void turnLeft(){
-        this.getMovementObj().turnLeft();
+        if (isFlatBedUp) this.getMovementObj().turnLeft();
     }
 
     @Override
     public void turnRight(){
-        this.getMovementObj().turnRight();
+        if (isFlatBedUp) this.getMovementObj().turnRight();
     }
 
     @Override

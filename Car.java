@@ -7,6 +7,8 @@ abstract public class Car extends Vehicle implements Movable {
         super(nrDoors, color, enginePower, modelName);
     }
 
+
+
     @Override
     public void move(){
         this.getMovementObj().move(this.getCurrentSpeed());
@@ -21,6 +23,4 @@ abstract public class Car extends Vehicle implements Movable {
     public void turnLeft(){
         this.getMovementObj().turnLeft();
     }
-
-
 }

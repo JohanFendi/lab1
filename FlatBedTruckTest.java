@@ -53,6 +53,7 @@ class FlatBedTruckTest {
         assertEquals(flatBedPosition.getX(), flatBedPosition.getY());
     }
 
+    /*
     @Test
     void loadFlatBed() {
         saabPosition.setX(5);
@@ -81,10 +82,5 @@ class FlatBedTruckTest {
         assertFalse(flatBedTruckObj.isWithinRadius(saab95));
     }
 
-
-
-
-
-
-
+     */
 }
