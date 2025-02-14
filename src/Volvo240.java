@@ -9,7 +9,6 @@ public class Volvo240 extends Car {
     private static final String NAME = "Volvo240";
     private static final double TRIM_FACTOR = 1.25;
 
-
     public Volvo240(Color color){
         super(Volvo240.NR_DOORS, color, Volvo240.ENGINE_POWER, Volvo240.NAME);
     }

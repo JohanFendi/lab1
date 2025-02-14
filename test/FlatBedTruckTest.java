@@ -12,10 +12,7 @@ class FlatBedTruckTest {
     private FlatBedTruck flatBedTruckObj;
     private Position flatBedPosition;
     private Vector flatBedVector;
-
     private Saab95 saab95;
-    private Position saabPosition;
-
 
     @BeforeEach
     void testObject() {
@@ -23,9 +20,7 @@ class FlatBedTruckTest {
         MovementObj flatBedMovementObj = flatBedTruckObj.getMovementObj();
         flatBedVector = flatBedMovementObj.getVector();
         flatBedPosition = flatBedTruckObj.getMovementObj().getPosition();
-
         saab95 = new Saab95(Color.black);
-        saabPosition = saab95.getMovementObj().getPosition();
     }
 
     @Test
@@ -47,7 +42,6 @@ class FlatBedTruckTest {
 
     @Test
     void testMoveForwardXmToLeftXm(){
-
         flatBedTruckObj.gas(0.5);
         flatBedTruckObj.move();
         flatBedTruckObj.turnLeft();

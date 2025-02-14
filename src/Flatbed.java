@@ -28,7 +28,7 @@ public class Flatbed<T> {
         return this.storage.pop();
     }
 
-    private boolean isFull(){
+    public boolean isFull(){
         return this.storage.size() >= maxCapacity;
     }
 

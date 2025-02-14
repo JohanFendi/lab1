@@ -2,7 +2,7 @@ package src;
 
 import java.awt.*;
 
-abstract public class Vehicle {
+abstract public class Vehicle implements Movable {
 
     private static final String GAS_BREAK_AMOUNT_ERROR = "Method input must be between 0 and 1.";
     private static final int START_XVECTOR = 1;
@@ -29,11 +29,53 @@ abstract public class Vehicle {
         stopEngine();
     }
 
-    protected static double clamp(double minValue, double maxValue, double value) {
-        if (value < minValue) value = minValue;
-        if (value > maxValue) value = maxValue;
-        return value;
+    //Methods for movement
+
+    abstract protected boolean isMoveable();
+
+    @Override
+    public void turnLeft(){
+        if(this.isMoveable()) this.getMovementObj().turnLeft();
     }
+
+    @Override
+    public void turnRight(){
+        if(this.isMoveable()) this.getMovementObj().turnRight();
+    }
+
+    @Override
+    public void move() {if(this.isMoveable()) this.getMovementObj().move(this.getCurrentSpeed());
+    }
+
+    public void gas(double amount) {
+        if (amount < 0 || amount > 1 || this.isMoveable()) {
+            throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
+        }
+        incrementSpeed(amount);
+        this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
+    }
+
+    public void brake(double amount) {
+        if (amount < 0 || amount > 1 || this.isMoveable()) {
+            throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
+        }
+        decrementSpeed(amount);
+        this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
+    }
+
+    private void incrementSpeed(double amount) {
+        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+    }
+
+    private void decrementSpeed(double amount) {
+        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+    }
+
+    protected double speedFactor() {
+        return getEnginePower() * 0.01;
+    }
+
+    // Getters and setters
 
     public String getModelName() {
         return this.modelName;
@@ -51,8 +93,8 @@ abstract public class Vehicle {
         return currentSpeed;
     }
 
-    protected void setCurrentSpeed(double speed) {
-        this.currentSpeed = speed;
+    public void setMovementObj(MovementObj movementObj){
+        this.movementObj = movementObj;
     }
 
     public Color getColor() {
@@ -71,40 +113,17 @@ abstract public class Vehicle {
         currentSpeed = 0;
     }
 
-    abstract protected double speedFactor();
-
-    protected void incrementSpeed(double amount) {
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
-
-    protected void decrementSpeed(double amount) {
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
-
     public MovementObj getMovementObj(){
         return this.movementObj;
     }
 
-    public void setMovementObj(MovementObj movementObj){
-        this.movementObj = movementObj;
-    }
+    // General methods
 
-    public void gas(double amount) {
-        if (amount < 0 || amount > 1) {
-            throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
-        }
-        incrementSpeed(amount);
-        this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
+    protected static double clamp(double minValue, double maxValue, double value) {
+        if (value < minValue) value = minValue;
+        if (value > maxValue) value = maxValue;
+        return value;
     }
-
-    public void brake(double amount) {
-        if (amount < 0 || amount > 1) {
-            throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
-        }
-        decrementSpeed(amount);
-        this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
-    }
-
 
 }
 

@@ -30,12 +30,4 @@ public class Saab95 extends Car {
         if(turboOn) turbo = Saab95.turbo;
         return getEnginePower() * 0.01 * turbo;
     }
-
-
-
-
-
 }
-
-
-//klassinvariant

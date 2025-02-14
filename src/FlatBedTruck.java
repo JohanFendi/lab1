@@ -15,54 +15,56 @@ public class FlatBedTruck extends Vehicle implements Movable {
     private boolean isFlatBedUp = true;
     private final Flatbed<Car> flatBed;
 
-
     public FlatBedTruck(Color color) {
         super(FlatBedTruck.NR_DOORS, color, FlatBedTruck.ENGINE_POWER, FlatBedTruck.MODEL_NAME);
         this.flatBed = new Flatbed<Car>(FLATBED_MAXCAPACITY);
     }
 
+    //Flatbed methods
+
     public void loadFlatBed(Car car) {
-        Position truckPos = this.getMovementObj().getPosition();
-        if (isFlatBedLoadable(car) && isWithinRadius(car)) {
-            this.flatBed.loadObject(car);
+        if (car.isLoaded()) {
+            return;
         }
-        car.setMovementObj(this.getMovementObj());
+        Position truckPos = this.getMovementObj().getPosition();
+        if (isFlatBedLoadable() && isWithinRadius(car) && !flatBed.isFull()) {
+            car.setIsLoaded(true);
+            this.flatBed.loadObject(car);
+            car.setMovementObj(this.getMovementObj());
+        }
     }
 
     public Car unLoadCar() {
         if (isFlatBedUp) {
             return null;
         }
-        Car unloadedCar = this.flatBed.unLoadObject();
-
+        Car unloadedCar = flatBed.unLoadObject();
         if (unloadedCar == null) {
             return null;
         }
+        unloadedCar.setIsLoaded(false);
         Position truckPos = this.getMovementObj().getPosition();
         Vector carUnloadedVector = this.getMovementObj().getVector();
         Position carUnloadedPosition = new Position(truckPos.getX() + UNLOAD_OFFSET,
-                                        truckPos.getY() + UNLOAD_OFFSET);
+                truckPos.getY() + UNLOAD_OFFSET);
         unloadedCar.setMovementObj(new MovementObj(carUnloadedVector, carUnloadedPosition));
-
         return unloadedCar;
     }
 
-    @Override
-    public void turnLeft(){
-        if (isFlatBedUp) this.getMovementObj().turnLeft();
-    }
-
-    @Override
-    public void turnRight(){
-        if (isFlatBedUp) this.getMovementObj().turnRight();
-    }
-
-    @Override
-    public void move() {
-        if(isFlatBedUp) {
-            this.getMovementObj().move(this.getCurrentSpeed());
-            this.updateLoadedCarPositions();
+    public void lowerFlatBed() {
+        if (isFlatBedAdjustable() && this.isFlatBedUp) {
+            this.isFlatBedUp = false;
         }
+    }
+
+    public void raiseFlatBed() {
+        if (isFlatBedAdjustable() && !this.isFlatBedUp) {
+            this.isFlatBedUp = true;
+        }
+    }
+
+    private boolean isFlatBedLoadable() {
+        return !this.isFlatBedUp;
     }
 
     private boolean isWithinRadius(Car car) {
@@ -73,6 +75,25 @@ public class FlatBedTruck extends Vehicle implements Movable {
         return distance <= FlatBedTruck.MAX_LOADING_RADIUS;
     }
 
+    private boolean isFlatBedAdjustable() {
+        return this.getCurrentSpeed() == 0;
+    }
+
+    //Movement methods
+
+    @Override
+    protected boolean isMoveable() {
+        return this.isFlatBedUp;
+    }
+
+    @Override
+    public void move() {
+        if (this.isMoveable()) {
+            this.getMovementObj().move(this.getCurrentSpeed());
+            this.updateLoadedCarPositions();
+        }
+    }
+
     private void updateLoadedCarPositions() {
         Position truckPos = this.getMovementObj().getPosition();
         Vector truckVector = this.getMovementObj().getVector();
@@ -80,30 +101,5 @@ public class FlatBedTruck extends Vehicle implements Movable {
         for (Car car : this.flatBed.getLoadedCars()) {
             car.setMovementObj(new MovementObj(truckVector, truckPos));
         }
-    }
-
-    @Override
-    protected double speedFactor() {
-        return getEnginePower() * 0.01;
-    }
-
-    private boolean isFlatBedAdjustable() {
-        return this.getCurrentSpeed() == 0;
-    }
-
-    private void lowerFlatBed() {
-        if (isFlatBedAdjustable() && this.isFlatBedUp) {
-            this.isFlatBedUp = false;
-        }
-    }
-
-    private void raiseFlatBed() {
-        if (isFlatBedAdjustable() && !this.isFlatBedUp) {
-            this.isFlatBedUp = true;
-        }
-    }
-
-    private boolean isFlatBedLoadable(Car car) {
-        return !this.isFlatBedUp;
     }
 }
