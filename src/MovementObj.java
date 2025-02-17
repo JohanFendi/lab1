@@ -4,6 +4,7 @@ public class MovementObj {
 
     private Vector vector;
     private Position position;
+    int reverseIdx = 1;
 
     public MovementObj(Vector vector, Position position){
         this.vector = vector;
@@ -29,8 +30,15 @@ public class MovementObj {
     public void move(double speed){
         Position position = this.getPosition();
         Vector vector = this.getVector();
-        position.setX(position.getX() + speed * vector.getX());
+        if (position.getX() >= CarView.X){
+            reverseIdx = -1;
+        }else if (position.getX() <= 0){
+            reverseIdx = 1;
+        }
+        position.setX(position.getX() + ((speed * vector.getX()) * reverseIdx));
         position.setY(position.getY() + speed * vector.getY());
+
+
         this.setPosition(position);
     }
 
