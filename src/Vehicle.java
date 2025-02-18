@@ -48,17 +48,21 @@ abstract public class Vehicle implements Movable {
     }
 
     public void gas(double amount) {
-        if (amount < 0 || amount > 1 || this.isMoveable()) {
+        if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
-        incrementSpeed(amount);
-        this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
+
+        if (isMoveable()){
+            incrementSpeed(amount);
+            this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
+        }
     }
 
     public void brake(double amount) {
-        if (amount < 0 || amount > 1 || this.isMoveable()) {
+        if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
+
         decrementSpeed(amount);
         this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
     }

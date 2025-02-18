@@ -21,8 +21,6 @@ class Saab95Test {
         saabPosition = saab.getMovementObj().getPosition();
 
     }
-
-
     @Test
     void testStartVector(){
         assertTrue(saabVector.getY() == 0 && saabVector.getX() == 1);
