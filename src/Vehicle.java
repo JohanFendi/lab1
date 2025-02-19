@@ -45,7 +45,21 @@ abstract public class Vehicle implements Movable {
 
     @Override
     public void move() {
-        if (this.isMoveable()) this.getMovementObj().move(this.getCurrentSpeed());
+        if (this.isMoveable()) {
+            if (this.movementObj.carHitsWall()) {
+                double currentSpeed = this.getCurrentSpeed();
+
+                while(this.getCurrentSpeed() > 0) {
+                    this.brake(1);
+                }
+                this.movementObj.invertDirection();
+                this.currentSpeed = currentSpeed;
+                this.getMovementObj().move(this.getCurrentSpeed());
+            }
+            else {
+                this.getMovementObj().move(this.getCurrentSpeed());
+            }
+        }
     }
 
     public void gas(double amount) {

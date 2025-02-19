@@ -89,8 +89,24 @@ public class FlatBedTruck extends Vehicle implements Movable {
     @Override
     public void move() {
         if (this.isMoveable()) {
-            this.getMovementObj().move(this.getCurrentSpeed());
-            this.updateLoadedCarPositions();
+            if (this.getMovementObj().carHitsWall()) {
+                double currentSpeed = this.getCurrentSpeed();
+
+                while(this.getCurrentSpeed() > 0) {
+                    this.brake(1);
+                }
+                this.getMovementObj().invertDirection();
+                while(this.getCurrentSpeed() > currentSpeed) {
+                    this.gas(1);
+                }
+
+                this.getMovementObj().move(this.getCurrentSpeed());
+                this.updateLoadedCarPositions();
+            }
+            else {
+                this.getMovementObj().move(this.getCurrentSpeed());
+                this.updateLoadedCarPositions();
+            }
         }
     }
 
