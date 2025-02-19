@@ -31,6 +31,8 @@ public class MovementObj {
         Vector vector = this.getVector();
         position.setX(position.getX() + speed * vector.getX());
         position.setY(position.getY() + speed * vector.getY());
+
+
         this.setPosition(position);
     }
 

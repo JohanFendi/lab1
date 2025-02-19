@@ -25,7 +25,7 @@ abstract public class Vehicle implements Movable {
         this.enginePower = enginePower;
         this.modelName = modelName;
         this.movementObj = new MovementObj(new Vector(START_XVECTOR, START_YVECTOR),
-                                            new Position(START_XPOS, START_YPOS));
+                new Position(START_XPOS, START_YPOS));
         stopEngine();
     }
 
@@ -34,29 +34,32 @@ abstract public class Vehicle implements Movable {
     abstract protected boolean isMoveable();
 
     @Override
-    public void turnLeft(){
-        if(this.isMoveable()) this.getMovementObj().turnLeft();
+    public void turnLeft() {
+        if (this.isMoveable()) this.getMovementObj().turnLeft();
     }
 
     @Override
-    public void turnRight(){
-        if(this.isMoveable()) this.getMovementObj().turnRight();
+    public void turnRight() {
+        if (this.isMoveable()) this.getMovementObj().turnRight();
     }
 
     @Override
-    public void move() {if(this.isMoveable()) this.getMovementObj().move(this.getCurrentSpeed());
+    public void move() {
+        if (this.isMoveable()) this.getMovementObj().move(this.getCurrentSpeed());
     }
 
     public void gas(double amount) {
-        if (amount < 0 || amount > 1 || this.isMoveable()) {
+        if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
-        incrementSpeed(amount);
-        this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
+        if (isMoveable()) {
+            incrementSpeed(amount);
+            this.currentSpeed = clamp(0.0, this.enginePower, currentSpeed);
+        }
     }
 
     public void brake(double amount) {
-        if (amount < 0 || amount > 1 || this.isMoveable()) {
+        if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException(Vehicle.GAS_BREAK_AMOUNT_ERROR);
         }
         decrementSpeed(amount);
@@ -93,7 +96,7 @@ abstract public class Vehicle implements Movable {
         return currentSpeed;
     }
 
-    public void setMovementObj(MovementObj movementObj){
+    public void setMovementObj(MovementObj movementObj) {
         this.movementObj = movementObj;
     }
 
@@ -113,7 +116,7 @@ abstract public class Vehicle implements Movable {
         currentSpeed = 0;
     }
 
-    public MovementObj getMovementObj(){
+    public MovementObj getMovementObj() {
         return this.movementObj;
     }
 
