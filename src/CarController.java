@@ -33,6 +33,7 @@ public class CarController {
         CarController cc = new CarController();
 
        cc.cars.add(new Volvo240(Color.BLACK));
+       cc.cars.add(new Saab95(Color.RED));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -50,7 +51,7 @@ public class CarController {
                 car.move();
                 int x = (int) Math.round(car.getMovementObj().getPosition().getX());
                 int y = (int) Math.round(car.getMovementObj().getPosition().getY());
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.moveit(car, x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -71,4 +72,23 @@ public class CarController {
             car.brake(brake);
         }
     }
+
+    void setTurboOn() {
+        for(Car car : cars) {
+            if(car instanceof Saab95) {
+                setTurboOn();
+            }
+        }
+    }
+    void setTurboOff() {
+        for(Car car : cars) {
+            if(car instanceof Saab95) {
+                setTurboOff();
+            }
+        }
+    }
+
+
+
+
 }

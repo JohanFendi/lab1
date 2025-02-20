@@ -115,6 +115,24 @@ public class CarView extends JFrame{
                 carC.brake(gasAmount);
             }
         });
+
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.setTurboOn();
+            }
+        });
+
+        turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.setTurboOff();
+            }
+        });
+
+
+
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
