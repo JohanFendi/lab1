@@ -20,7 +20,7 @@ public class FlatBedTruck extends Vehicle implements Movable {
         this.flatBed = new Flatbed<Car>(FLATBED_MAXCAPACITY);
     }
 
-    //Flatbed methods
+    //Methods for loading, unloading and adjusting flatbed.
 
     public void loadFlatBed(Car car) {
         if (car.isLoaded()) {
