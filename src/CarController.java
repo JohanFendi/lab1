@@ -51,9 +51,6 @@ public class CarController {
 
         carController.frame = new CarView(WINDOW_TITLE, carController);
         carController.timer.start();
-
-
-
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the

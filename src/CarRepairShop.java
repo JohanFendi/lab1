@@ -3,7 +3,7 @@ package src;
 import java.util.HashMap;
 
 
-public class CarRepairShop<T extends Car> {
+public class CarRepairShop<T extends Car>{
 
     private final int maxNumCars;
     private int currentNumCars = 0;
