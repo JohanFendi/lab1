@@ -25,7 +25,7 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<Vehicle> cars = new ArrayList<>();
-
+    //CarRepairShop<Volvo240> volvoWorkshop = new CarRepairShop<>(10);
     //methods:
 
     public static void main(String[] args) {
@@ -36,7 +36,8 @@ public class CarController {
        cc.cars.add(new Saab95(Color.RED));
        cc.cars.add(new Scania(Color.CYAN, 200));
 
-       //CarRepairShop<Volvo240> volvoWorkshop = new CarRepairShop<>(10);
+
+
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
