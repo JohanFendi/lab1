@@ -24,7 +24,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
+    ArrayList<Vehicle> cars = new ArrayList<>();
 
     //methods:
 
@@ -34,6 +34,9 @@ public class CarController {
 
        cc.cars.add(new Volvo240(Color.BLACK));
        cc.cars.add(new Saab95(Color.RED));
+       cc.cars.add(new Scania(Color.CYAN, 200));
+
+       //CarRepairShop<Volvo240> volvoWorkshop = new CarRepairShop<>(10);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -47,7 +50,7 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
+            for (Vehicle car : cars) {
                 car.move();
                 int x = (int) Math.round(car.getMovementObj().getPosition().getX());
                 int y = (int) Math.round(car.getMovementObj().getPosition().getY());
@@ -61,32 +64,65 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             car.gas(gas);
         }
     }
-
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             car.brake(brake);
         }
     }
 
+
+
     void setTurboOn() {
-        for(Car car : cars) {
+        for(Vehicle car : cars) {
             if(car instanceof Saab95) {
-                setTurboOn();
+                ((Saab95) car).setTurboOn();
+                //måste fixa, inte bra med såna casts
             }
         }
     }
     void setTurboOff() {
-        for(Car car : cars) {
+        for(Vehicle car : cars) {
             if(car instanceof Saab95) {
-                setTurboOff();
+                ((Saab95) car).setTurboOff();
+                //måste fixa, inte bra med såna casts
             }
         }
     }
+
+
+    void liftBedButton() {
+        for(Vehicle car : cars) {
+            if(car instanceof Scania) {
+                ((Scania) car).adjustRamp(70);
+                //måste fixa, inte bra med såna casts
+            }
+        }
+    }
+    void lowerBedButton() {
+        for(Vehicle car : cars) {
+            if(car instanceof Scania) {
+                ((Scania) car).adjustRamp(0);
+                //måste fixa, inte bra med såna casts
+            }
+        }
+    }
+
+    void startButton() {
+        for(Vehicle car : cars) {
+            car.startEngine();
+        }
+    }
+    void stopButton() {
+        for(Vehicle car : cars) {
+            car.stopEngine();
+        }
+    }
+
 
 
 
