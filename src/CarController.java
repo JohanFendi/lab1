@@ -115,6 +115,7 @@ public class CarController {
             }
         }
     }
+
     void setTurboOff() {
         for(Vehicle vehicle: this.vehicles) {
             if(vehicle instanceof Saab95) {
@@ -123,7 +124,6 @@ public class CarController {
             }
         }
     }
-
 
     void liftBedButton() {
         for(Vehicle vehicle: this.vehicles){
@@ -160,7 +160,5 @@ public class CarController {
     protected ArrayList<String> getPictureRoutes(){
         return this.pictureRoutes;
     }
-
-
-
 }
+
