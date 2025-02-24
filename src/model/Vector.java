@@ -1,10 +1,10 @@
-package src;
+package src.model;
 
-public class Position {
+public class Vector {
     private double x;
     private double y;
 
-    public Position(double x, double y){
+    public Vector(double x, double y){
         this.x = x;
         this.y = y;
     }

@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.awt.*;
 import java.util.ArrayList;
-import src.*;
+
+import src.model.Car;
+import src.model.Flatbed;
+import src.model.Volvo240;
 
 
 import static org.junit.jupiter.api.Assertions.*;

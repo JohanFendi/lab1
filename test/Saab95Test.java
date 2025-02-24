@@ -5,7 +5,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.awt.*;
-import src.*;
+
+import src.model.MovementObj;
+import src.model.Position;
+import src.model.Saab95;
+import src.model.Vector;
 
 class Saab95Test {
 

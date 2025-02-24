@@ -1,5 +1,7 @@
 package src;
 
+import src.model.Position;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;

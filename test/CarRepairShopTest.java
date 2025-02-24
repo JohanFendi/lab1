@@ -1,8 +1,11 @@
 package test;
 
-import src.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import src.model.Car;
+import src.model.CarRepairShop;
+import src.model.Volvo240;
+
 import java.awt.*;
 
 class CarRepairShopTest {

@@ -1,5 +1,7 @@
 package src;
 
+import src.model.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

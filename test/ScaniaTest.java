@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.awt.*;
-import src.*;
+
+import src.model.Position;
+import src.model.Scania;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScaniaTest {

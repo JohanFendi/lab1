@@ -2,11 +2,11 @@ package test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.MovementObj;
-import src.Position;
-import src.Vector;
-import src.Volvo240;
-import src.*;
+import src.model.MovementObj;
+import src.model.Position;
+import src.model.Vector;
+import src.model.Volvo240;
+
 import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;

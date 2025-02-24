@@ -1,5 +1,8 @@
 package src;
 
+import src.model.Position;
+import src.model.Vehicle;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
