@@ -36,8 +36,8 @@ public class DrawPanel extends JPanel{
         this.pictureRoutes = pictureRoutes;
         this.positions = positions;
         for (String pictureRoute : pictureRoutes){
-            try{
-                InputStream imgStream = DrawPanel.class.getResourceAsStream( pictureRoute);
+            try {
+                InputStream imgStream = DrawPanel.class.getResourceAsStream(pictureRoute);
                 if (imgStream == null) {
                     throw new IllegalArgumentException("Image not found: " + pictureRoute);
                 }

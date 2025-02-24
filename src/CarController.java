@@ -23,10 +23,12 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     private CarView frame;
     private CarRepairShop<Volvo240> volvoRepairShop = new CarRepairShop<Volvo240>(10);
+
     private int workShopPickUpDist = 25; //Manhattan distance
     private Position repairshopPosition = new Position(300, 100);
-    private final ArrayList<Vehicle> vehicles = new ArrayList<>();
-    private final ArrayList<String> pictureRoutes = new ArrayList<>();
+
+    private final ArrayList<Vehicle> vehicles = new ArrayList<>();  // Listan med alla fordon
+    private final ArrayList<String> pictureRoutes = new ArrayList<>(); // Listan med alla bild-vägar
 
     public static void main(String[] args) {
         CarController carController = new CarController();
@@ -35,7 +37,6 @@ public class CarController {
         volvo.getMovementObj().setPosition(new Position(100, 100));
         carController.vehicles.add(volvo); //Add vehicles and their respective picture links before creating view.
         carController.pictureRoutes.add("pics/Volvo240.jpg");
-
 
         Scania scania = new Scania(Color.green, 1000);
         scania.getMovementObj().setPosition(new Position(100, 300));
@@ -49,6 +50,8 @@ public class CarController {
 
         carController.pictureRoutes.add("pics/VolvoBrand.jpg");
 
+        // Skapar applikationsfönstret, får en referens till carController,
+        // för att knyta användarens interaktioner (knapptryck) med de metoder i kontrollern som hanterar logiken.
         carController.frame = new CarView(WINDOW_TITLE, carController);
         carController.timer.start();
     }
@@ -86,6 +89,9 @@ public class CarController {
                     vector.setY(vector.getY() * -1);
                 }
 
+                //Bryter mot Seperation of Concern, CarController måste känna till den inre strukturen i CarView, att den har en drawPanel.
+                // Istället, hade CarController inte längre behövt känna till att CarView har en drawPanel eller hur den fungerar.
+                // Den ansvarar enbart för att säga “uppdatera vyn” och låter CarView hantera detaljerna för att rita om fordonen.
                 CarController.this.frame.drawPanel.moveit(x, y, pictureRoute);
                 CarController.this.frame.drawPanel.repaint();
             }

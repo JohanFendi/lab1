@@ -15,6 +15,8 @@ import java.util.ArrayList;
  * each of it's components.
  **/
 
+// Närmast användaren
+
 public class CarView extends JFrame{
     private static final int X =800;
     private static final int Y = 800;
@@ -59,13 +61,16 @@ public class CarView extends JFrame{
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
+
         ArrayList<Position> positions = new ArrayList<>();
+        // Lägger till fordonens positioner i listan med alla positioner
         for (Vehicle vehicle : this.carController.getVehicles()){
             positions.add(vehicle.getMovementObj().getPosition());
         }
+
         positions.add(new Position(300, 100)); //RepairShop position
 
-        DrawPanel drawPanel = new DrawPanel(X, Y-240, positions, this.carController.getPictureRoutes(), Color.green);
+        DrawPanel drawPanel = new DrawPanel(X, Y-240, positions, this.carController.getPictureRoutes(), Color.blue);
         this.drawPanel = drawPanel;
         this.add(drawPanel);
 
