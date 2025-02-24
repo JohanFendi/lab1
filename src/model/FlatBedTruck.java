@@ -5,7 +5,7 @@ import java.awt.*;
 public class FlatBedTruck extends Vehicle {
 
     private int FLATBED_MAXCAPACITY;
-    private double MAX_LOADING_RADIUS;
+    private static double MAX_LOADING_RADIUS;
     private double UNLOAD_OFFSET;
 
 
