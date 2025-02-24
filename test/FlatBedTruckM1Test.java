@@ -8,45 +8,45 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import src.model.*;
 
-class FlatBedTruckTest {
+class FlatBedTruckM1Test {
 
-    private FlatBedTruck flatBedTruckObj;
+    private FlatBedTruckM1 flatBedTruckM1Obj;
     private Position flatBedPosition;
     private Vector flatBedVector;
     private Saab95 saab95;
 
     @BeforeEach
     void testObject() {
-        flatBedTruckObj = new FlatBedTruck(Color.BLACK);
-        MovementObj flatBedMovementObj = flatBedTruckObj.getMovementObj();
+        flatBedTruckM1Obj = new FlatBedTruckM1(Color.BLACK);
+        MovementObj flatBedMovementObj = flatBedTruckM1Obj.getMovementObj();
         flatBedVector = flatBedMovementObj.getVector();
-        flatBedPosition = flatBedTruckObj.getMovementObj().getPosition();
+        flatBedPosition = flatBedTruckM1Obj.getMovementObj().getPosition();
         saab95 = new Saab95(Color.black);
     }
 
     @Test
     void testTurnLeft360degrees(){
-        flatBedTruckObj.turnLeft();
-        flatBedTruckObj.turnLeft();
-        flatBedTruckObj.turnLeft();
-        flatBedTruckObj.turnLeft();
+        flatBedTruckM1Obj.turnLeft();
+        flatBedTruckM1Obj.turnLeft();
+        flatBedTruckM1Obj.turnLeft();
+        flatBedTruckM1Obj.turnLeft();
         assertTrue(flatBedVector.getY() == 0 && flatBedVector.getX() == 1);
     }
 
     @Test
     void testTurnLeft270degrees(){
-        flatBedTruckObj.turnLeft();
-        flatBedTruckObj.turnLeft();
-        flatBedTruckObj.turnLeft();
+        flatBedTruckM1Obj.turnLeft();
+        flatBedTruckM1Obj.turnLeft();
+        flatBedTruckM1Obj.turnLeft();
         assertTrue(flatBedVector.getY() == -1 && flatBedVector.getX() == 0);
     }
 
     @Test
     void testMoveForwardXmToLeftXm(){
-        flatBedTruckObj.gas(0.5);
-        flatBedTruckObj.move();
-        flatBedTruckObj.turnLeft();
-        flatBedTruckObj.move();
+        flatBedTruckM1Obj.gas(0.5);
+        flatBedTruckM1Obj.move();
+        flatBedTruckM1Obj.turnLeft();
+        flatBedTruckM1Obj.move();
         Assertions.assertEquals(flatBedPosition.getX(), flatBedPosition.getY());
     }
 
