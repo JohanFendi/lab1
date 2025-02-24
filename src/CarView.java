@@ -83,13 +83,6 @@ public class CarView extends JFrame{
             }
         });
 
-        // Each panel below has its implementation and ActionListener.
-
-        gasPanel.setLayout(new BorderLayout());
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
-        this.add(gasPanel);
-
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {carController.gas(gasAmount);}
@@ -143,6 +136,10 @@ public class CarView extends JFrame{
             }
         });
 
+        gasPanel.setLayout(new BorderLayout());
+        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
+        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+        this.add(gasPanel);
 
         controlPanel.setLayout(new GridLayout(2,4));
         controlPanel.add(gasButton, 0);
