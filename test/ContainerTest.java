@@ -8,12 +8,12 @@ import src.*;
 
 class ContainerTest {
 
-    private Container c;
+    private ContainerM1 c;
     private static final double MAX_VOLUME = 10;
 
     @BeforeEach
     void createNewContainer(){
-        this.c = new Container(MAX_VOLUME);
+        this.c = new ContainerM1(MAX_VOLUME);
     }
 
     @Test

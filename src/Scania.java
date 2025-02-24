@@ -11,12 +11,12 @@ public class Scania extends Vehicle{
     private static final double ANGLE_MIN = 0;
 
     private double rampAngle = 0.0;
-    private final src.Container container;
+    private final ContainerM1 containerM1;
 
 
     public Scania(Color color, double containerVolume) {
         super(Scania.NR_DOORS, color, Scania.ENGINE_POWER, Scania.MODEL_NAME);
-        this.container = new Container(containerVolume);
+        this.containerM1 = new ContainerM1(containerVolume);
     }
 
     //Movement methods
@@ -37,11 +37,11 @@ public class Scania extends Vehicle{
     }
 
     public double loadContainer(double volume){
-        return this.container.load(volume);
+        return this.containerM1.load(volume);
     }
 
     public double unloadContainer(double volume){
-        return this.container.unload(volume);
+        return this.containerM1.unload(volume);
     }
 
     private boolean isRampAdjustable() {
