@@ -10,6 +10,7 @@ public class Movement {
 
 
 
+
     public static void move(Position pos, Vector v, double speed){
         pos.setX(pos.getX() + speed * v.getX());
         pos.setY(pos.getY() + speed * v.getY());

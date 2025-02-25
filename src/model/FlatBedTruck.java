@@ -25,11 +25,12 @@ public class FlatBedTruck extends Vehicle {
         if (car.isLoaded()) {
             return;
         }
-        Position truckPos = this.getMovementObj().getPosition();
+        //Position truckPos = this.getMovementObj().getPosition();
         if (isFlatBedLoadable() && isWithinRadius(car) && !flatBed.isFull()) {
             car.setIsLoaded(true);
             this.flatBed.loadObject(car);
-            car.setMovementObj(this.getMovementObj());
+            car.setPos(this.getPosition());
+            car.setVector(this.getVector());
         }
     }
 
@@ -42,11 +43,13 @@ public class FlatBedTruck extends Vehicle {
             return null;
         }
         unloadedCar.setIsLoaded(false);
-        Position truckPos = this.getMovementObj().getPosition();
-        Vector carUnloadedVector = this.getMovementObj().getVector();
+        Position truckPos = this.getPosition();
+        Vector carUnloadedVector = this.getVector();
         Position carUnloadedPosition = new Position(truckPos.getX() + UNLOAD_OFFSET,
                 truckPos.getY() + UNLOAD_OFFSET);
-        unloadedCar.setMovementObj(new MovementObj(carUnloadedVector, carUnloadedPosition));
+
+        unloadedCar.setPos(carUnloadedPosition);
+        unloadedCar.setVector(carUnloadedVector);
         return unloadedCar;
     }
 
@@ -67,10 +70,9 @@ public class FlatBedTruck extends Vehicle {
     }
 
     private boolean isWithinRadius(Car car) {
-        Position carPosition = car.getMovementObj().getPosition();
-        Position truckPosition = this.getMovementObj().getPosition();
-
-        double distance = Math.hypot(carPosition.getX() - truckPosition.getX(), carPosition.getY() - truckPosition.getY());
+        double distance = Math.hypot(
+                car.getPosition().getX() - this.getPosition().getX(),
+                car.getPosition().getY() - this.getPosition().getY());
         return distance <= FlatBedTruck.MAX_LOADING_RADIUS;
     }
 
@@ -81,10 +83,10 @@ public class FlatBedTruck extends Vehicle {
     //Movement methods
 
     @Override
-    protected boolean isMoveable() {
+    public boolean isMoveable() {
         return this.isFlatBedUp;
     }
-
+/*
     @Override
     public void move() {
         if (this.isMoveable()) {
@@ -93,12 +95,25 @@ public class FlatBedTruck extends Vehicle {
         }
     }
 
+ */
+
+
+    @Override
+    public void move() {
+        if (this.isMoveable()) {
+            Movement.move(getPosition(), this.getVector(), this.getCurrentSpeed());
+            this.updateLoadedCarPositions();
+        }
+    }
+
     private void updateLoadedCarPositions() {
-        Position truckPos = this.getMovementObj().getPosition();
-        Vector truckVector = this.getMovementObj().getVector();
+        Position truckPos = this.getPosition();
+        Vector truckVector = this.getVector();
 
         for (Car car : this.flatBed.getLoadedCars()) {
-            car.setMovementObj(new MovementObj(truckVector, truckPos));
+            car.setPos(truckPos);
+            car.setVector(truckVector);
+
         }
     }
 }

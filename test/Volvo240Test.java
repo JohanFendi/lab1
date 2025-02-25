@@ -2,7 +2,7 @@ package test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.model.MovementObj;
+import src.model.Movement;
 import src.model.Position;
 import src.model.Vector;
 import src.model.Volvo240;
@@ -14,14 +14,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class Volvo240Test {
 
     private Volvo240 volvo240;
-    private MovementObj volvoMovmentObj;
+    private Movement volvoMovmentObj;
     private Vector volvoVector;
     private Position volvoPosition;
 
     @BeforeEach
     void betweenTests(){
         this.volvo240 = new Volvo240(Color.black);
-        MovementObj volvoMovmentObj = volvo240.getMovementObj();
+        Movement volvoMovmentObj = volvo240.getMovementObj();
         volvoVector = volvoMovmentObj.getVector();
         volvoPosition = volvo240.getMovementObj().getPosition();
 

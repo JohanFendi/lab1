@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.awt.*;
 
-import src.model.MovementObj;
+import src.model.Movement;
 import src.model.Position;
 import src.model.Saab95;
 import src.model.Vector;
@@ -20,7 +20,7 @@ class Saab95Test {
     @BeforeEach
     void betweenTests(){
         this.saab = new Saab95(Color.black);
-        MovementObj saabMovementObj = saab.getMovementObj();
+        Movement saabMovementObj = saab.getMovementObj();
         saabVector = saabMovementObj.getVector();
         saabPosition = saab.getMovementObj().getPosition();
 
