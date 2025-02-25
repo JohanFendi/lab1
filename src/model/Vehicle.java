@@ -31,7 +31,7 @@ abstract public class Vehicle implements Movable {
 
     //Methods for movement
 
-    abstract protected boolean isMoveable();
+    abstract public boolean isMoveable();
 
     @Override
     public void turnLeft(){

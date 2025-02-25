@@ -18,7 +18,7 @@ abstract public class Car extends Vehicle {
     }
 
     @Override
-    protected boolean isMoveable(){
+    public boolean isMoveable(){
         return !this.isLoaded;
     }
 }

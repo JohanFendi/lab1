@@ -18,17 +18,9 @@ public class DrawPanel extends JPanel{
     private ArrayList<Position> positions;
     private ArrayList<String> pictureRoutes;
 
-
-    void moveit(int x, int y, String pictureRoute){
-        int index = this.pictureRoutes.indexOf(pictureRoute);
-        if (index == -1){
-            throw new IllegalArgumentException(PICTURE_ROUTE_MISSING_ERROR);
-        }
-        Position objPosition = this.positions.get(index);
-        objPosition.setX(x);
-        objPosition.setY(y);
+    public void updatePicturePositions(ArrayList<Position> positions){
+        this.positions = positions;
     }
-
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y, ArrayList<Position> positions, ArrayList<String> pictureRoutes, Color color) {
@@ -55,6 +47,7 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        System.out.println(this.images.size() == this.positions.size());
         for (int i = 0; i < this.images.size(); i++){
             BufferedImage image = this.images.get(i);
             Position position = this.positions.get(i);

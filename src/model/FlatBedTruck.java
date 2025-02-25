@@ -82,7 +82,7 @@ public class FlatBedTruck extends Vehicle implements Movable {
     //Movement methods
 
     @Override
-    protected boolean isMoveable() {
+    public boolean isMoveable() {
         return this.isFlatBedUp;
     }
 

@@ -49,13 +49,12 @@ public class CarView extends JFrame{
     protected int getScreenHeight(){
         return CarView.Y;
     }
-    // Constructor
-    public CarView(String framename, CarController cc){
+
+    public CarView(String frameName, CarController cc){
         this.carController = cc;
-        this.initComponents(framename);
+        this.initComponents(frameName);
     }
 
-    // Sets everything in place and fits everything
     private void initComponents(String title) {
 
         this.setTitle(title);

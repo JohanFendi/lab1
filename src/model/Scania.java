@@ -22,7 +22,7 @@ public class Scania extends Vehicle {
     //Movement methods
 
     @Override
-    protected boolean isMoveable() {
+    public boolean isMoveable() {
         return rampAngle == 0;
     }
 

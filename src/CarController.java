@@ -32,7 +32,6 @@ public class CarController {
 
     public static void main(String[] args) {
         CarController carController = new CarController();
-
         Volvo240 volvo = new Volvo240(Color.green);
         volvo.getMovementObj().setPosition(new Position(100, 100));
         carController.vehicles.add(volvo); //Add vehicles and their respective picture links before creating view.
@@ -88,7 +87,7 @@ public class CarController {
                     vector.setY(vector.getY() * -1);
                 }
 
-                CarController.this.frame.drawPanel.moveit(x, y, pictureRoute);
+                //CarController.this.frame.drawPanel.moveit(x, y, pictureRoute);
                 CarController.this.frame.drawPanel.repaint();
             }
         }
