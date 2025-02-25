@@ -2,22 +2,21 @@ package src.model;
 
 import java.awt.*;
 
-public class FlatBedTruck extends Vehicle implements Movable {
+public class FlatBedTruck extends Vehicle {
 
-    private static final int NR_DOORS = 2;
-    private static final int ENGINE_POWER = 75;
-    private static final String MODEL_NAME = "FlatBedTruck";
-    private static final int FLATBED_MAXCAPACITY = 10;
-    private static final double MAX_LOADING_RADIUS = 1;
-    private static final double UNLOAD_OFFSET = 1;
+    private int FLATBED_MAXCAPACITY;
+    private static double MAX_LOADING_RADIUS;
+    private double UNLOAD_OFFSET;
 
 
     private boolean isFlatBedUp = true;
-    private final Flatbed<Car> flatBed;
+    private final FlatBed<Car> flatBed;
 
-    public FlatBedTruck(Color color) {
-        super(FlatBedTruck.NR_DOORS, color, FlatBedTruck.ENGINE_POWER, FlatBedTruck.MODEL_NAME);
-        this.flatBed = new Flatbed<Car>(FLATBED_MAXCAPACITY);
+    public FlatBedTruck(int nrDoors,Color color , double enginePower, String modelName, double maxLoadingRadius, double unloadOffset) {
+        super(nrDoors, color, enginePower, modelName);
+        this.MAX_LOADING_RADIUS = maxLoadingRadius;
+        this.UNLOAD_OFFSET = unloadOffset;
+        this.flatBed = new FlatbedM1<Car>(FLATBED_MAXCAPACITY);
     }
 
     //Methods for loading, unloading and adjusting flatbed.

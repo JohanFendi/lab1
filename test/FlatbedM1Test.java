@@ -8,23 +8,23 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import src.model.Car;
-import src.model.Flatbed;
+import src.model.FlatbedM1;
 import src.model.Volvo240;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FlatbedTest {
+class FlatbedM1Test {
 
     private static final int FLATBED_MAX_CAPACITY = 10;
     private static final int FLATBED_IS_EMPTY = 0;
-    private Flatbed<Volvo240> flatBed;
+    private FlatbedM1<Volvo240> flatBed;
     private Volvo240 testVolvo;
 
 
     @BeforeEach
     void testObject() {
-        this.flatBed = new Flatbed<>(FLATBED_MAX_CAPACITY);
+        this.flatBed = new FlatbedM1<>(FLATBED_MAX_CAPACITY);
         this.testVolvo = new Volvo240(Color.BLUE);
     }
 
