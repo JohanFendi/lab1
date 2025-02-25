@@ -10,13 +10,15 @@ abstract public class Vehicle implements Movable {
     private static final double START_YPOS = 0;
     private static final double START_XPOS = 0;
 
+    private Position position;
+    private Vector vector;
+
     private final int nrDoors;
     private final double enginePower;
     private Color color;
     private final String modelName;
 
     //Movement variables
-    private MovementObj movementObj;
     private double currentSpeed;
 
     public Vehicle(int nrDoors, Color color, double enginePower, String modelName) {
@@ -24,8 +26,10 @@ abstract public class Vehicle implements Movable {
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
-        this.movementObj = new MovementObj(new Vector(START_XVECTOR, START_YVECTOR),
-                                            new Position(START_XPOS, START_YPOS));
+
+        this.position = new Position(0,0);
+        this.vector = new Vector(1, 0);
+
         stopEngine();
     }
 
@@ -35,16 +39,17 @@ abstract public class Vehicle implements Movable {
 
     @Override
     public void turnLeft(){
-        if(this.isMoveable()) this.getMovementObj().turnLeft();
+        if(this.isMoveable()) Movement.turnLeft(this.vector);
     }
 
     @Override
     public void turnRight(){
-        if(this.isMoveable()) this.getMovementObj().turnRight();
+        if(this.isMoveable()) Movement.turnRight(this.vector);
     }
 
     @Override
-    public void move() {if(this.isMoveable()) this.getMovementObj().move(this.getCurrentSpeed());
+    public void move() {
+        if (this.isMoveable()) Movement.move(this.position, this.vector, this.getCurrentSpeed());
     }
 
     public void gas(double amount) {
@@ -97,10 +102,6 @@ abstract public class Vehicle implements Movable {
         return currentSpeed;
     }
 
-    public void setMovementObj(MovementObj movementObj){
-        this.movementObj = movementObj;
-    }
-
     public Color getColor() {
         return color;
     }
@@ -117,9 +118,28 @@ abstract public class Vehicle implements Movable {
         currentSpeed = 0;
     }
 
-    public MovementObj getMovementObj(){
-        return this.movementObj;
+
+
+    public Position getPosition() {
+        return this.position;
     }
+
+    public Vector getVector() {
+        return this.vector;
+    }
+
+    public void setVector(Vector vector) {
+        this.vector = vector;
+    }
+    public void setPos(Position position) {
+        this.position = position;
+    }
+
+
+
+
+
+
 
     // General methods
 
