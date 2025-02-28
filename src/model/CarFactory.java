@@ -16,4 +16,5 @@ public class CarFactory implements VehicleFactory {
     public Vehicle createRandomVehicle() {
         return null;
     }
+
 }
