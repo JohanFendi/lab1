@@ -5,4 +5,5 @@ public interface VehicleFactory {
     public Vehicle createCar();
     public Vehicle createRandomVehicle();
 
+
 }

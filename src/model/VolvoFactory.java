@@ -2,9 +2,9 @@ package src.model;
 
 import java.awt.*;
 
-public class CarFactory implements VehicleFactory {
+public class VolvoFactory implements VehicleFactory {
 
-    public CarFactory() {
+    public VolvoFactory() {
     }
 
     @Override
@@ -16,5 +16,6 @@ public class CarFactory implements VehicleFactory {
     public Vehicle createRandomVehicle() {
         return null;
     }
+
 
 }
