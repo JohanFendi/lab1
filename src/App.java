@@ -33,7 +33,7 @@ public class App {
         pictureRoutes.add("pics/Volvo240.jpg");
 
 
-        Scania scania = new Scania(Color.green, 1000);
+        Scania scania = new Scania(Color.green, new ContainerM1(1000));
         scania.setPos(new Position(100, 300));
         vehicles.add(scania);
         pictureRoutes.add("pics/Scania.jpg");
@@ -44,7 +44,11 @@ public class App {
         pictureRoutes.add("pics/Saab95.jpg");
 
 
+
+
         pictureRoutes.add("pics/VolvoBrand.jpg");
+
+
 
         ModelFacade model = new ModelFacade(App.windowHeight, App.windowWidth, App.objectWidth, vehicles, factory);
         CarController carController = new CarController(model);
@@ -67,5 +71,7 @@ public class App {
             App.this.view.update(App.this.modelFacade.getPositions()); //Här skippar vi ju carcontroller
         }
     }
+
+
 
 }

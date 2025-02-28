@@ -3,17 +3,17 @@ package src.model;
 public class ContainerM1 implements Container {
 
     private static final String NEGATIVE_ARGUMENT_ERROR = "NegativeVolumeException: volume cannot be negative.";
-    private final double maxVolume;
+    private final double MAX_VOLUME;
     private double currentVolume = 0;
 
     public ContainerM1(double maxVolume) {
-        this.maxVolume = maxVolume;
+        this.MAX_VOLUME = maxVolume;
     }
 
     @Override
     public double getAvailableVolume(){
 
-        return this.maxVolume - this.currentVolume;
+        return this.MAX_VOLUME - this.currentVolume;
     }
 
 
@@ -23,9 +23,9 @@ public class ContainerM1 implements Container {
             throw new IllegalArgumentException(NEGATIVE_ARGUMENT_ERROR);
         }
         double overflow = 0;
-        if (this.currentVolume + volumeToAdd > this.maxVolume){
-            this.currentVolume = maxVolume;
-            overflow = this.currentVolume + volumeToAdd - this.maxVolume;
+        if (this.currentVolume + volumeToAdd > this.MAX_VOLUME){
+            this.currentVolume = MAX_VOLUME;
+            overflow = this.currentVolume + volumeToAdd - this.MAX_VOLUME;
         }
         return overflow;
     }

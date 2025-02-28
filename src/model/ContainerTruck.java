@@ -2,16 +2,18 @@ package src.model;
 
 import java.awt.*;
 
-public class ContainerTruck extends Vehicle {
+public abstract class ContainerTruck extends Vehicle {
 
     private Container container;
-    private double RAMP_ANGLE;
-    private double ANGLE_MIN;
-    private double ANGLE_MAX;
+    private double ramp_angle;
+    private final double ANGLE_MIN;
+    private final double ANGLE_MAX;
 
-    public ContainerTruck (int nrDoors, Color color, double enginePower, String modelName,Container container, double maxAngle, double minAngle, double rampAngle) {
+    public ContainerTruck (int nrDoors, Color color, double enginePower, String modelName,
+                           Container container, double maxAngle, double minAngle, double rampAngle) {
+
         super(nrDoors, color, enginePower, modelName);
-        this.RAMP_ANGLE = rampAngle;
+        this.ramp_angle = rampAngle;
         this.ANGLE_MIN = minAngle;
         this.ANGLE_MAX = maxAngle;
         this.container = container;
@@ -21,7 +23,7 @@ public class ContainerTruck extends Vehicle {
 
     @Override
     public boolean isMoveable() {
-        return RAMP_ANGLE == 0;
+        return ramp_angle == 0;
     }
 
     public void setContainer(Container newContainer) {
@@ -36,7 +38,7 @@ public class ContainerTruck extends Vehicle {
 
     public boolean adjustRamp(double angle) {
         if (this.isRampAdjustable()) {
-            RAMP_ANGLE = clamp(ANGLE_MIN, ANGLE_MAX, angle);
+            ramp_angle = clamp(ANGLE_MIN, ANGLE_MAX, angle);
             return true;
         }
         return false;
@@ -55,6 +57,6 @@ public class ContainerTruck extends Vehicle {
     }
 
     public double getRampAngle() {
-        return RAMP_ANGLE;
+        return ramp_angle;
     }
 }
