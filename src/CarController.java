@@ -9,6 +9,9 @@ public class CarController {
         this.modelFacade = modelFacade;
     }
 
+    void addCar(){this.modelFacade.addCar();}
+    void removeCar(){this.modelFacade.removeCar();}
+
     void gas(int amount) {
         this.modelFacade.gas(amount);
     }

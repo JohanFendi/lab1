@@ -26,6 +26,8 @@ public class CarView extends JFrame {
 
     private final JButton gasButton = new JButton("Gas");
     private final JButton brakeButton = new JButton("Brake");
+    private final JButton addCarButton = new JButton("AddCar");
+    private final JButton removeCarButton = new JButton("RemoveCar");
     private final JButton turboOnButton = new JButton("Saab Turbo on");
     private final JButton turboOffButton = new JButton("Saab Turbo off");
     private final JButton liftBedButton = new JButton("Scania Lift Bed");
@@ -60,6 +62,18 @@ public class CarView extends JFrame {
             public void stateChanged(ChangeEvent e) {
                 gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
+        });
+
+        addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carController.addCar();}
+        });
+
+        removeCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carController.removeCar();}
         });
 
         gasButton.addActionListener(new ActionListener() {

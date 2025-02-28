@@ -138,5 +138,7 @@ public class ModelFacade {
         vehicles.add(car);
 
     }
+    public void removeCar() {
+    }
 
 }
