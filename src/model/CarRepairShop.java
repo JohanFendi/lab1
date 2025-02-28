@@ -1,6 +1,7 @@
 package src.model;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class CarRepairShop<T extends Car>{
@@ -34,6 +35,22 @@ public class CarRepairShop<T extends Car>{
 
         T removedCar = this.carMap.get(carId);
         this.carMap.remove(carId);
+        currentNumCars--;
+        return removedCar;
+    }
+
+    public T takeOutCar(T car){
+        if (!this.carMap.containsValue(car)){
+            return null;
+        }
+
+        T removedCar = null;
+        for (Map.Entry<Integer, T> entry : this.carMap.entrySet()) {
+            if (entry.getValue().equals(car)) {
+                removedCar = carMap.remove(entry.getKey());
+                break;
+            }
+        }
         currentNumCars--;
         return removedCar;
     }

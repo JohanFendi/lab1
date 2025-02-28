@@ -10,8 +10,16 @@ public class CarController implements Controller {
         this.model = model;
     }
 
-    void addCar(){this.modelFacade.addCar();}
-    void removeCar(){this.modelFacade.removeCar();}
+    @Override
+    public String addCar(){
+        String className = this.model.addCar();
+        return className;
+    }
+
+    @Override
+    public boolean removeCar(){
+        return this.model.removeCar();
+    }
 
     @Override
     public void gas(int amount) {

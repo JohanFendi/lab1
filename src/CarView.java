@@ -10,9 +10,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CarView extends JFrame implements ModelListener, View {
     private static final String WINDOW_TITLE = "CarSim 1.0";
+    private static final String PICTURE_NOT_FOUND_EXCEPTION = "PictureNotFoundException: Class name does not have corresponding picture. ";
     private int windowWidth;
     private int windowHeight;
 
@@ -24,8 +26,9 @@ public class CarView extends JFrame implements ModelListener, View {
     private final JPanel gasPanel = new JPanel();
     private JSpinner gasSpinner;
     private int gasAmount = 0;
-    private final JLabel gasLabel = new JLabel("Amount of gas");
+    private final HashMap<String, String> classPictureMap;
 
+    private final JLabel gasLabel = new JLabel("Amount of gas");
     private final JButton gasButton = new JButton("Gas");
     private final JButton brakeButton = new JButton("Brake");
     private final JButton addCarButton = new JButton("AddCar");
@@ -37,11 +40,12 @@ public class CarView extends JFrame implements ModelListener, View {
     private final JButton startButton = new JButton("Start all cars");
     private final JButton stopButton = new JButton("Stop all cars");
 
-    public CarView(CarController carController, ArrayList<String> pictureRoutes, int windowWidth, int windowHeight, Model model){
+    public CarView(CarController carController, ArrayList<String> pictureRoutes, int windowWidth, int windowHeight, Model model, HashMap<String, String> classPictureMap){
         this.carController = carController;
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         this.model = model;
+        this.classPictureMap = classPictureMap;
         initComponents(pictureRoutes);
     }
 
@@ -71,13 +75,20 @@ public class CarView extends JFrame implements ModelListener, View {
         addCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carController.addCar();}
+                String className = carController.addCar();
+                String pictureRoute = classPictureMap.get(className);
+                drawPanel.addImage(pictureRoute);
+                model.update();
+            }
         });
 
         removeCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carController.removeCar();}
+                if (carController.removeCar()) {
+                    drawPanel.removeLastImage();
+                }
+            }
         });
 
         gasButton.addActionListener(new ActionListener() {

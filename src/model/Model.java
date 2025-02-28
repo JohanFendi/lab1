@@ -7,6 +7,8 @@ import java.util.ArrayList;
 public interface Model {
     ArrayList<Position> getObjectPositions();
 
+    void update();
+
     void addListener(ModelListener listener);
 
     void notifyListeners();
@@ -26,4 +28,8 @@ public interface Model {
     void startVehicles();
 
     void stopVehicles();
+
+    String addCar();
+
+    boolean removeCar();
 }

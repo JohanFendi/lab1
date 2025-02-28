@@ -17,4 +17,8 @@ public interface Controller {
     void startVehicles();
 
     void stopVehicles();
+
+    String addCar();
+
+    boolean removeCar();
 }

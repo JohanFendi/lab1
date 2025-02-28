@@ -16,6 +16,27 @@ public class ModelFacade implements Model {
     private final int mapHeight;
     private final int objectWidth;
 
+    public String addCar() {
+        Vehicle car = this.vehicleFactory.createCar();
+        car.setPos(new Position(100, 100));
+        vehicles.add(car);
+        return car.getClass().getName();
+    }
+
+    public boolean removeCar() {
+        Vehicle vehicle = vehicles.removeLast();
+
+        if (vehicle == null) {
+            return false;
+        }
+
+        if (vehicle instanceof Volvo240){
+            this.volvoRepairShop.takeOutCar((Volvo240) vehicle);
+        }
+
+        return true;
+
+    }
 
     public ModelFacade(int mapHeight, int mapWidth, int objectWidth, ArrayList<Vehicle> vehicles, VehicleFactory factory){
         this.mapHeight = mapHeight;
@@ -28,14 +49,14 @@ public class ModelFacade implements Model {
     @Override
     public ArrayList<Position> getObjectPositions(){
         ArrayList<Position> positions = new ArrayList<>();
+        positions.add(repairshopPosition);
         for (Vehicle vehicle : this.vehicles){
             positions.add(vehicle.getPosition());
         }
-        positions.add(repairshopPosition);
         return positions;
     }
 
-
+    @Override
     public void update() {
         for (Vehicle vehicle : vehicles) {
             if (!vehicle.isMoveable()) {

@@ -28,17 +28,25 @@ public class DrawPanel extends JPanel{
         this.setBackground(color);
         this.positions = positions;
         for (String pictureRoute : pictureRoutes){
-            try{
-                InputStream imgStream = DrawPanel.class.getResourceAsStream( pictureRoute);
-                if (imgStream == null) {
-                    throw new IllegalArgumentException("Image not found: " + pictureRoute);
-                }
-                this.images.add(ImageIO.read(imgStream));
-            } catch (IOException ex)
-            {
-                ex.printStackTrace();
-            }
+            this.addImage(pictureRoute);
         }
+    }
+
+    protected void addImage(String pictureRoute){
+        try{
+            InputStream imgStream = DrawPanel.class.getResourceAsStream( pictureRoute);
+            if (imgStream == null) {
+                throw new IllegalArgumentException("Image not found: " + pictureRoute);
+            }
+            this.images.add(ImageIO.read(imgStream));
+        } catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    protected void removeLastImage(){
+        this.images.removeLast();
     }
 
 
