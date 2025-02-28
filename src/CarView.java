@@ -135,26 +135,29 @@ public class CarView extends JFrame {
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
         this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2,4));
+        controlPanel.setLayout(new GridLayout(2,5));
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCarButton, 6);
+        controlPanel.add(removeCarButton, 7);
         controlPanel.setPreferredSize(new Dimension((this.windowWidth/2)+4, 200));
         controlPanel.setBackground(Color.CYAN);
         this.add(controlPanel);
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(this.windowWidth/5-15,200));
+        startButton.setPreferredSize(new Dimension(this.windowWidth/5-15,100));
         this.add(startButton);
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(this.windowWidth/5-15,200));
+        stopButton.setPreferredSize(new Dimension(this.windowWidth/5-15,100));
         this.add(stopButton);
+
 
 
         // Make the frame pack all it's components by respecting the sizes if possible.
