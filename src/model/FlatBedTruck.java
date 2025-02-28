@@ -12,11 +12,12 @@ public class FlatBedTruck extends Vehicle {
     private boolean isFlatBedUp = true;
     private final FlatBed<Car> flatBed;
 
-    public FlatBedTruck(int nrDoors,Color color , double enginePower, String modelName, double maxLoadingRadius, double unloadOffset) {
+    public FlatBedTruck(int nrDoors,Color color , double enginePower,
+                        String modelName, double maxLoadingRadius, double unloadOffset, FlatBed<Car> flatbed) {
         super(nrDoors, color, enginePower, modelName);
         this.MAX_LOADING_RADIUS = maxLoadingRadius;
         this.UNLOAD_OFFSET = unloadOffset;
-        this.flatBed = new FlatbedM1<Car>(FLATBED_MAXCAPACITY);
+        this.flatBed = flatbed;
     }
 
     //Methods for loading, unloading and adjusting flatbed.
