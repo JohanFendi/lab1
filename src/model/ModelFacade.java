@@ -3,26 +3,30 @@ package src.model;
 import java.util.ArrayList;
 
 public class ModelFacade {
-    private CarRepairShop<Volvo240> volvoRepairShop = new CarRepairShop<Volvo240>(10);
+    private CarRepairShop<Volvo240> volvoRepairShop = new CarRepairShop<>(10);
     private int workShopPickUpDist = 25; //Manhattan distance
     private Position repairshopPosition = new Position(300, 100);
     private final ArrayList<Vehicle> vehicles;
+    private VehicleFactory vehicleFactory;
+
+
     private int mapWidth;
     private int mapHeight;
     private int objectWidth;
 
 
-    public ModelFacade(int mapHeight, int mapWidth, int objectWidth, ArrayList<Vehicle> vehicles){
+    public ModelFacade(int mapHeight, int mapWidth, int objectWidth, ArrayList<Vehicle> vehicles, VehicleFactory factory){
         this.mapHeight = mapHeight;
         this.mapWidth = mapWidth;
         this.objectWidth = objectWidth;
         this.vehicles = vehicles;
+        this.vehicleFactory = factory;
     }
 
     public ArrayList<Position> getPositions(){
         ArrayList<Position> positions = new ArrayList<>();
         for (Vehicle vehicle : this.vehicles){
-            positions.add(vehicle.getMovementObj().getPosition());
+            positions.add(vehicle.getPosition());
         }
         positions.add(repairshopPosition);
         return positions;
@@ -48,7 +52,7 @@ public class ModelFacade {
 
     private boolean pickUpVolvo(Vehicle vehicle){
         if (vehicle instanceof Volvo240) {
-            Position volvoPosition = vehicle.getMovementObj().getPosition();
+            Position volvoPosition = vehicle.getPosition();
             double manhattanDist = Math.abs(volvoPosition.getX() - repairshopPosition.getX()) + Math.abs(volvoPosition.getY() - repairshopPosition.getY());
             if (manhattanDist < workShopPickUpDist) {
                 ((Volvo240) vehicle).setIsLoaded(true);
@@ -60,10 +64,10 @@ public class ModelFacade {
     }
 
     private void keepVehicleInBounds(Vehicle vehicle){
-        int x = (int) Math.round(vehicle.getMovementObj().getPosition().getX());
-        int y = (int) Math.round(vehicle.getMovementObj().getPosition().getY());
-        Position position = vehicle.getMovementObj().getPosition();
-        Vector vector = vehicle.getMovementObj().getVector();
+        int x = (int) Math.round(vehicle.getPosition().getX());
+        int y = (int) Math.round(vehicle.getPosition().getY());
+        Position position = vehicle.getPosition();
+        Vector vector = vehicle.getVector();
         if (!(0 <= position.getX() && position.getX() < this.mapWidth - this.objectWidth)) {
             vector.setX(vector.getX() * -1);
         }
@@ -88,7 +92,7 @@ public class ModelFacade {
 
     public void setTurboOn() {
         for(Vehicle vehicle : this.vehicles) {
-            if(vehicle instanceof Saab95) {
+            if(vehicle instanceof TurboAble) {
                 ((Saab95) vehicle).setTurboOn();
             }
         }
@@ -96,7 +100,7 @@ public class ModelFacade {
 
     public void setTurboOff() {
         for(Vehicle vehicle: this.vehicles) {
-            if(vehicle instanceof Saab95) {
+            if(vehicle instanceof TurboAble) {
                 ((Saab95) vehicle).setTurboOff();
             }
         }

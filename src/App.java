@@ -25,27 +25,28 @@ public class App {
 
         ArrayList<Vehicle> vehicles = new ArrayList<>();
         ArrayList<String> pictureRoutes = new ArrayList<>();
+        VehicleFactory factory = new VolvoFactory();
 
         Volvo240 volvo = new Volvo240(Color.green);
-        volvo.getMovementObj().setPosition(new Position(100, 100));
+        volvo.setPos(new Position(100, 100));
         vehicles.add(volvo); //Add vehicles and their respective picture links before creating view.
         pictureRoutes.add("pics/Volvo240.jpg");
 
 
         Scania scania = new Scania(Color.green, 1000);
-        scania.getMovementObj().setPosition(new Position(100, 300));
+        scania.setPos(new Position(100, 300));
         vehicles.add(scania);
         pictureRoutes.add("pics/Scania.jpg");
 
         Saab95 saab = new Saab95(Color.green);
-        saab.getMovementObj().setPosition(new Position(100, 200));
+        saab.setPos(new Position(100, 200));
         vehicles.add(saab);
         pictureRoutes.add("pics/Saab95.jpg");
 
 
         pictureRoutes.add("pics/VolvoBrand.jpg");
 
-        ModelFacade model = new ModelFacade(App.windowHeight, App.windowWidth, App.objectWidth, vehicles);
+        ModelFacade model = new ModelFacade(App.windowHeight, App.windowWidth, App.objectWidth, vehicles, factory);
         CarController carController = new CarController(model);
         CarView carView = new CarView(carController, pictureRoutes, model.getPositions(), App.windowWidth, App.windowHeight);
         //View carView = new View(carController, new ArrayList<>(), new ArrayList<>(), App.windowWidth, App.windowHeight);
