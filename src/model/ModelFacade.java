@@ -1,19 +1,42 @@
 package src.model;
 
+import src.ModelListener;
+
 import java.util.ArrayList;
 
-public class ModelFacade {
-    private CarRepairShop<Volvo240> volvoRepairShop = new CarRepairShop<>(10);
-    private int workShopPickUpDist = 25; //Manhattan distance
-    private Position repairshopPosition = new Position(300, 100);
+public class ModelFacade implements Model {
+    private final CarRepairShop<Volvo240> volvoRepairShop = new CarRepairShop<>(10);
+    private final int workShopPickUpDist = 25; //Manhattan distance
+    private final Position repairshopPosition = new Position(300, 100);
     private final ArrayList<Vehicle> vehicles;
     private VehicleFactory vehicleFactory;
 
+    private final ArrayList<ModelListener> listeners = new ArrayList<>();
+    private final int mapWidth;
+    private final int mapHeight;
+    private final int objectWidth;
 
-    private int mapWidth;
-    private int mapHeight;
-    private int objectWidth;
+    public String addCar() {
+        Vehicle car = this.vehicleFactory.createCar();
+        car.setPos(new Position(100, 100));
+        vehicles.add(car);
+        return car.getClass().getName();
+    }
 
+    public boolean removeCar() {
+        Vehicle vehicle = vehicles.removeLast();
+
+        if (vehicle == null) {
+            return false;
+        }
+
+        if (vehicle instanceof Volvo240){
+            this.volvoRepairShop.takeOutCar((Volvo240) vehicle);
+        }
+
+        return true;
+
+    }
 
     public ModelFacade(int mapHeight, int mapWidth, int objectWidth, ArrayList<Vehicle> vehicles, VehicleFactory factory){
         this.mapHeight = mapHeight;
@@ -23,16 +46,17 @@ public class ModelFacade {
         this.vehicleFactory = factory;
     }
 
-    public ArrayList<Position> getPositions(){
+    @Override
+    public ArrayList<Position> getObjectPositions(){
         ArrayList<Position> positions = new ArrayList<>();
+        positions.add(repairshopPosition);
         for (Vehicle vehicle : this.vehicles){
             positions.add(vehicle.getPosition());
         }
-        positions.add(repairshopPosition);
         return positions;
     }
 
-
+    @Override
     public void update() {
         for (Vehicle vehicle : vehicles) {
             if (!vehicle.isMoveable()) {
@@ -48,6 +72,7 @@ public class ModelFacade {
             vehicle.move();
             this.keepVehicleInBounds(vehicle);
         }
+        this.notifyListeners();
     }
 
     private boolean pickUpVolvo(Vehicle vehicle){
@@ -76,6 +101,7 @@ public class ModelFacade {
         }
     }
 
+    @Override
     public void gas(int amount) {
         double gasAmount = ((double) amount) / 100;
         for (Vehicle vehicle : this.vehicles) {
@@ -83,6 +109,7 @@ public class ModelFacade {
         }
     }
 
+    @Override
     public void brake(int amount) {
         double gasAmount = ((double) amount) / 100;
         for (Vehicle vehicle : this.vehicles) {
@@ -90,6 +117,7 @@ public class ModelFacade {
         }
     }
 
+    @Override
     public void setTurboOn() {
         for(Vehicle vehicle : this.vehicles) {
             if(vehicle instanceof Turbo) {
@@ -98,6 +126,7 @@ public class ModelFacade {
         }
     }
 
+    @Override
     public void setTurboOff() {
         for(Vehicle vehicle: this.vehicles) {
             if(vehicle instanceof Turbo) {
@@ -106,6 +135,7 @@ public class ModelFacade {
         }
     }
 
+    @Override
     public void liftBed() {
         for(Vehicle vehicle: this.vehicles){
             if(vehicle instanceof Scania) {
@@ -113,6 +143,8 @@ public class ModelFacade {
             }
         }
     }
+
+    @Override
     public void lowerBed() {
         for(Vehicle vehicle: this.vehicles) {
             if(vehicle instanceof Scania) {
@@ -121,27 +153,29 @@ public class ModelFacade {
         }
     }
 
+    @Override
     public void startVehicles() {
         for(Vehicle vehicle: this.vehicles){
             vehicle.startEngine();
         }
     }
+
+    @Override
     public void stopVehicles() {
         for(Vehicle vehicle: this.vehicles){
             vehicle.stopEngine();
         }
     }
 
-    public void addCar() {
-        Vehicle car = this.vehicleFactory.createCar();
-        car.setPos(new Position(100, 100));
-        vehicles.add(car);
-
+    @Override
+    public void addListener(ModelListener listener){
+        this.listeners.add(listener);
     }
 
-
-    public void removeCar() {
-        vehicles.removeLast();
+    @Override
+    public void notifyListeners(){
+        for (ModelListener listener : this.listeners){
+            listener.actOnNotification();
+        }
     }
-
 }

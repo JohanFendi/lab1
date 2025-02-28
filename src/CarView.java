@@ -1,5 +1,6 @@
 package src;
 
+import src.model.Model;
 import src.model.Position;
 
 import javax.swing.*;
@@ -9,21 +10,25 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class CarView extends JFrame {
+public class CarView extends JFrame implements ModelListener, View {
     private static final String WINDOW_TITLE = "CarSim 1.0";
+    private static final String PICTURE_NOT_FOUND_EXCEPTION = "PictureNotFoundException: Class name does not have corresponding picture. ";
     private int windowWidth;
     private int windowHeight;
 
     private DrawPanel drawPanel;
-    private final CarController carController;
+    private final Controller carController;
+    private final Model model;
 
     private final JPanel controlPanel = new JPanel();
     private final JPanel gasPanel = new JPanel();
     private JSpinner gasSpinner;
     private int gasAmount = 0;
-    private final JLabel gasLabel = new JLabel("Amount of gas");
+    private final HashMap<String, String> classPictureMap;
 
+    private final JLabel gasLabel = new JLabel("Amount of gas");
     private final JButton gasButton = new JButton("Gas");
     private final JButton brakeButton = new JButton("Brake");
     private final JButton addCarButton = new JButton("AddCar");
@@ -35,24 +40,27 @@ public class CarView extends JFrame {
     private final JButton startButton = new JButton("Start all cars");
     private final JButton stopButton = new JButton("Stop all cars");
 
-    public CarView(CarController carController, ArrayList<String> pictureRoutes, ArrayList<Position> positions, int windowWidth, int windowHeight){
+    public CarView(CarController carController, ArrayList<String> pictureRoutes, int windowWidth, int windowHeight, Model model, HashMap<String, String> classPictureMap){
         this.carController = carController;
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
-        initComponents(positions, pictureRoutes);
+        this.model = model;
+        this.classPictureMap = classPictureMap;
+        initComponents(pictureRoutes);
     }
 
-    public void update(ArrayList<Position> positions){
-        this.drawPanel.updatePicturePositions(positions);
+    @Override
+    public void actOnNotification(){
+        this.drawPanel.updatePicturePositions(model.getObjectPositions());
         this.drawPanel.repaint();
     }
 
-    private void initComponents(ArrayList<Position> positions, ArrayList<String> pictureRoutes) {
+    private void initComponents(ArrayList<String> pictureRoutes) {
         this.setTitle(CarView.WINDOW_TITLE);
         this.setPreferredSize(new Dimension(windowWidth, windowHeight));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        this.drawPanel = new DrawPanel(windowWidth, windowHeight - 240, positions, pictureRoutes, Color.green);
+        this.drawPanel = new DrawPanel(windowWidth, windowHeight - 240, model.getObjectPositions(), pictureRoutes, Color.green);
         this.add(drawPanel);
 
         SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
@@ -67,13 +75,20 @@ public class CarView extends JFrame {
         addCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carController.addCar();}
+                String className = carController.addCar();
+                String pictureRoute = classPictureMap.get(className);
+                drawPanel.addImage(pictureRoute);
+                model.update();
+            }
         });
 
         removeCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carController.removeCar();}
+                if (carController.removeCar()) {
+                    drawPanel.removeLastImage();
+                }
+            }
         });
 
         gasButton.addActionListener(new ActionListener() {

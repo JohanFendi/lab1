@@ -3,15 +3,11 @@ package src.model;
 import java.awt.*;
 
 abstract public class Vehicle implements Movable {
-
     private static final String GAS_BREAK_AMOUNT_ERROR = "Method input must be between 0 and 1.";
     private static final int START_XVECTOR = 1;
     private static final int START_YVECTOR = 0;
     private static final double START_YPOS = 0;
     private static final double START_XPOS = 0;
-
-    private Position position;
-    private Vector vector;
 
     private final int nrDoors;
     private final double enginePower;
@@ -20,6 +16,8 @@ abstract public class Vehicle implements Movable {
 
     //Movement variables
     private double currentSpeed;
+    private Position position;
+    private Vector vector;
 
     public Vehicle(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
@@ -27,8 +25,8 @@ abstract public class Vehicle implements Movable {
         this.enginePower = enginePower;
         this.modelName = modelName;
 
-        this.position = new Position(0,0);
-        this.vector = new Vector(1, 0);
+        this.position = new Position(START_XPOS,START_YPOS);
+        this.vector = new Vector(START_XVECTOR, START_YVECTOR);
 
         stopEngine();
     }
