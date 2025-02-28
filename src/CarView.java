@@ -1,7 +1,6 @@
 package src;
 
 import src.model.Position;
-import src.model.Vehicle;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -11,64 +10,47 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-/**
- * This class represents the full view of the MVC pattern of your car simulator.
- * It initializes with being center on the screen and attaching it's controller in it's state.
- * It communicates with the Controller by calling methods of it when an action fires of in
- * each of it's components.
- **/
+public class CarView extends JFrame {
+    private static final String WINDOW_TITLE = "CarSim 1.0";
+    private int windowWidth;
+    private int windowHeight;
 
-public class CarView extends JFrame{
-    private static final int X =800;
-    private static final int Y = 800;
+    private DrawPanel drawPanel;
+    private final CarController carController;
 
-    // The controller member
-    CarController carController;
-    DrawPanel drawPanel;
-    JPanel controlPanel = new JPanel();
+    private final JPanel controlPanel = new JPanel();
+    private final JPanel gasPanel = new JPanel();
+    private JSpinner gasSpinner;
+    private int gasAmount = 0;
+    private final JLabel gasLabel = new JLabel("Amount of gas");
 
-    JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
-    JLabel gasLabel = new JLabel("Amount of gas");
+    private final JButton gasButton = new JButton("Gas");
+    private final JButton brakeButton = new JButton("Brake");
+    private final JButton turboOnButton = new JButton("Saab Turbo on");
+    private final JButton turboOffButton = new JButton("Saab Turbo off");
+    private final JButton liftBedButton = new JButton("Scania Lift Bed");
+    private final JButton lowerBedButton = new JButton("Lower Lift Bed");
+    private final JButton startButton = new JButton("Start all cars");
+    private final JButton stopButton = new JButton("Stop all cars");
 
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
-
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
-
-    protected int getScreenWidth(){
-        return CarView.X;
+    public CarView(CarController carController, ArrayList<String> pictureRoutes, ArrayList<Position> positions, int windowWidth, int windowHeight){
+        this.carController = carController;
+        this.windowWidth = windowWidth;
+        this.windowHeight = windowHeight;
+        initComponents(positions, pictureRoutes);
     }
 
-    protected int getScreenHeight(){
-        return CarView.Y;
+    public void update(ArrayList<Position> positions){
+        this.drawPanel.updatePicturePositions(positions);
+        this.drawPanel.repaint();
     }
 
-    public CarView(String frameName, CarController cc){
-        this.carController = cc;
-        this.initComponents(frameName);
-    }
-
-    private void initComponents(String title) {
-
-        this.setTitle(title);
-        this.setPreferredSize(new Dimension(X,Y));
+    private void initComponents(ArrayList<Position> positions, ArrayList<String> pictureRoutes) {
+        this.setTitle(CarView.WINDOW_TITLE);
+        this.setPreferredSize(new Dimension(windowWidth, windowHeight));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        ArrayList<Position> positions = new ArrayList<>();
-        for (Vehicle vehicle : this.carController.getVehicles()){
-            positions.add(vehicle.getMovementObj().getPosition());
-        }
-        positions.add(new Position(300, 100)); //RepairShop position
-
-        DrawPanel drawPanel = new DrawPanel(X, Y-240, positions, this.carController.getPictureRoutes(), Color.green);
-        this.drawPanel = drawPanel;
+        this.drawPanel = new DrawPanel(windowWidth, windowHeight - 240, positions, pictureRoutes, Color.green);
         this.add(drawPanel);
 
         SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
@@ -82,12 +64,14 @@ public class CarView extends JFrame{
 
         gasButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {carController.gas(gasAmount);}
+            public void actionPerformed(ActionEvent e) {
+                carController.gas(gasAmount);}
         });
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {carController.brake(gasAmount);}
+            public void actionPerformed(ActionEvent e) {
+                carController.brake(gasAmount);}
         });
 
         turboOnButton.addActionListener(new ActionListener() {
@@ -104,32 +88,31 @@ public class CarView extends JFrame{
             }
         });
 
-
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carController.liftBedButton();
+                carController.liftBed();
             }
         });
 
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carController.lowerBedButton();
+                carController.lowerBed();
             }
         });
 
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carController.startButton();
+                carController.startVehicles();
             }
         });
 
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carController.stopButton();
+                carController.stopVehicles();
             }
         });
 
@@ -145,18 +128,18 @@ public class CarView extends JFrame{
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
-        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
+        controlPanel.setPreferredSize(new Dimension((this.windowWidth/2)+4, 200));
         controlPanel.setBackground(Color.CYAN);
         this.add(controlPanel);
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
+        startButton.setPreferredSize(new Dimension(this.windowWidth/5-15,200));
         this.add(startButton);
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
+        stopButton.setPreferredSize(new Dimension(this.windowWidth/5-15,200));
         this.add(stopButton);
 
 

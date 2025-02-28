@@ -18,8 +18,8 @@ public class App {
     private Timer timer = new Timer(delay, new App.TimerListener());
 
     private ModelFacade modelFacade;
-    private Controller controller;
-    private View view;
+    private CarController carController;
+    private CarView view;
 
     public static void main(String[] args){
 
@@ -46,17 +46,17 @@ public class App {
         pictureRoutes.add("pics/VolvoBrand.jpg");
 
         ModelFacade model = new ModelFacade(App.windowHeight, App.windowWidth, App.objectWidth, vehicles);
-        Controller carController = new Controller(model);
-        View carView = new View(carController, pictureRoutes, model.getPositions(), App.windowWidth, App.windowHeight);
+        CarController carController = new CarController(model);
+        CarView carView = new CarView(carController, pictureRoutes, model.getPositions(), App.windowWidth, App.windowHeight);
         //View carView = new View(carController, new ArrayList<>(), new ArrayList<>(), App.windowWidth, App.windowHeight);
         App app = new App(model, carController, carView);
         app.timer.start();
         System.out.println();
     }
 
-    public App(ModelFacade modelFacade, Controller controller, View view){
+    public App(ModelFacade modelFacade, CarController carController, CarView view){
         this.modelFacade = modelFacade;
-        this.controller = controller;
+        this.carController = carController;
         this.view = view;
     }
 
