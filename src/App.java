@@ -18,8 +18,8 @@ public class App {
     private Timer timer = new Timer(delay, new App.TimerListener());
 
     private ModelFacade modelFacade;
-    private CarController carController;
-    private CarView view;
+    private Controller carController;
+    private View view;
 
     public static void main(String[] args){
 
@@ -48,24 +48,20 @@ public class App {
 
         ModelFacade model = new ModelFacade(App.windowHeight, App.windowWidth, App.objectWidth, vehicles, factory);
         CarController carController = new CarController(model);
-        CarView carView = new CarView(carController, pictureRoutes, model.getPositions(), App.windowWidth, App.windowHeight);
-        //View carView = new View(carController, new ArrayList<>(), new ArrayList<>(), App.windowWidth, App.windowHeight);
-        App app = new App(model, carController, carView);
+        CarView carView = new CarView(carController, pictureRoutes, App.windowWidth, App.windowHeight, model);
+        App app = new App(model);
+
+        model.addListener(carView);
         app.timer.start();
-        System.out.println();
     }
 
-    public App(ModelFacade modelFacade, CarController carController, CarView view){
+    public App(ModelFacade modelFacade){
         this.modelFacade = modelFacade;
-        this.carController = carController;
-        this.view = view;
     }
 
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             App.this.modelFacade.update();
-            App.this.view.update(App.this.modelFacade.getPositions()); //Här skippar vi ju carcontroller
         }
     }
-
 }

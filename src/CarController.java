@@ -1,45 +1,54 @@
 package src;
 
+import src.model.Model;
 import src.model.ModelFacade;
 
-public class CarController {
-    private final ModelFacade modelFacade;
+public class CarController implements Controller {
+    private final Model model;
 
-    public CarController(ModelFacade modelFacade){
-        this.modelFacade = modelFacade;
+    public CarController(ModelFacade model){
+        this.model = model;
     }
 
     void addCar(){this.modelFacade.addCar();}
     void removeCar(){this.modelFacade.removeCar();}
 
-    void gas(int amount) {
-        this.modelFacade.gas(amount);
+    @Override
+    public void gas(int amount) {
+        this.model.gas(amount);
     }
 
-    void brake(int amount) {
-        this.modelFacade.brake(amount);
+    @Override
+    public void brake(int amount) {
+        this.model.brake(amount);
     }
 
-    void setTurboOn() {
-        this.modelFacade.setTurboOn();
+    @Override
+    public void setTurboOn() {
+        this.model.setTurboOn();
     }
 
-    void setTurboOff() {
-        this.modelFacade.setTurboOff();
+    @Override
+    public void setTurboOff() {
+        this.model.setTurboOff();
     }
 
-    void liftBed() {
-        this.modelFacade.liftBed();
+    @Override
+    public void liftBed() {
+        this.model.liftBed();
+    }
+    @Override
+    public void lowerBed() {
+        this.model.lowerBed();
     }
 
-    void lowerBed() {
-        this.modelFacade.lowerBed();
+    @Override
+    public void startVehicles() {
+        this.model.startVehicles();
     }
 
-    void startVehicles() {
-        this.modelFacade.startVehicles();
-    }
-    void stopVehicles() {
-        this.modelFacade.stopVehicles();
+    @Override
+    public void stopVehicles() {
+        this.model.stopVehicles();
     }
 }

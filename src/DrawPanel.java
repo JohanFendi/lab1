@@ -16,7 +16,6 @@ public class DrawPanel extends JPanel{
     private static final String PICTURE_ROUTE_MISSING_ERROR = "PictureRouteError: Picture route not in DrawPanel.";
     private ArrayList<BufferedImage> images = new ArrayList<>();
     private ArrayList<Position> positions;
-    private ArrayList<String> pictureRoutes;
 
     public void updatePicturePositions(ArrayList<Position> positions){
         this.positions = positions;
@@ -27,7 +26,6 @@ public class DrawPanel extends JPanel{
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(color);
-        this.pictureRoutes = pictureRoutes;
         this.positions = positions;
         for (String pictureRoute : pictureRoutes){
             try{
@@ -47,7 +45,6 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        System.out.println(this.images.size() == this.positions.size());
         for (int i = 0; i < this.images.size(); i++){
             BufferedImage image = this.images.get(i);
             Position position = this.positions.get(i);
