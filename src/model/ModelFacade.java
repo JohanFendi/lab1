@@ -92,7 +92,7 @@ public class ModelFacade {
 
     public void setTurboOn() {
         for(Vehicle vehicle : this.vehicles) {
-            if(vehicle instanceof TurboAble) {
+            if(vehicle instanceof Turbo) {
                 ((Saab95) vehicle).setTurboOn();
             }
         }
@@ -100,7 +100,7 @@ public class ModelFacade {
 
     public void setTurboOff() {
         for(Vehicle vehicle: this.vehicles) {
-            if(vehicle instanceof TurboAble) {
+            if(vehicle instanceof Turbo) {
                 ((Saab95) vehicle).setTurboOff();
             }
         }

@@ -67,4 +67,5 @@ public class App {
             App.this.view.update(App.this.modelFacade.getPositions()); //Här skippar vi ju carcontroller
         }
     }
+
 }
