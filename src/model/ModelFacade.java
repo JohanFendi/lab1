@@ -131,4 +131,12 @@ public class ModelFacade {
             vehicle.stopEngine();
         }
     }
+
+    public void addCar() {
+        Vehicle car = this.vehicleFactory.createCar();
+        car.setPos(new Position(100, 100));
+        vehicles.add(car);
+
+    }
+
 }
