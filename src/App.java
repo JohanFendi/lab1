@@ -19,8 +19,6 @@ public class App {
     private Timer timer = new Timer(delay, new App.TimerListener());
 
     private ModelFacade modelFacade;
-    private Controller carController;
-    private View view;
 
     public static void main(String[] args){
 
@@ -43,13 +41,11 @@ public class App {
         pictureRoutes.add("pics/Scania.jpg");
         classPictureMap.put(scania.getClass().getName(),"pics/Scania.jpg");
 
-
         Saab95 saab = new Saab95(Color.green);
         saab.setPos(new Position(100, 200));
         vehicles.add(saab);
         pictureRoutes.add("pics/Saab95.jpg");
         classPictureMap.put(saab.getClass().getName(),"pics/Saab95.jpg");
-
 
         ModelFacade model = new ModelFacade(App.windowHeight, App.windowWidth, App.objectWidth, vehicles, factory);
         CarController carController = new CarController(model);

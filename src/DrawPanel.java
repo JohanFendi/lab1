@@ -13,8 +13,7 @@ import javax.swing.*;
 // This panel represents the animated part of the view with the car images.
 // Associates each pictureRoute with its graphical position.
 public class DrawPanel extends JPanel{
-    private static final String PICTURE_ROUTE_MISSING_ERROR = "PictureRouteError: Picture route not in DrawPanel.";
-    private ArrayList<BufferedImage> images = new ArrayList<>();
+    private final ArrayList<BufferedImage> images = new ArrayList<>();
     private ArrayList<Position> positions;
 
     public void updatePicturePositions(ArrayList<Position> positions){
@@ -48,7 +47,6 @@ public class DrawPanel extends JPanel{
     protected void removeLastImage(){
         this.images.removeLast();
     }
-
 
     @Override
     protected void paintComponent(Graphics g) {

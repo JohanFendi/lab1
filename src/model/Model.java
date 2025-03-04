@@ -5,13 +5,6 @@ import src.ModelListener;
 import java.util.ArrayList;
 
 public interface Model {
-    ArrayList<Position> getObjectPositions();
-
-    void update();
-
-    void addListener(ModelListener listener);
-
-    void notifyListeners();
 
     void gas(int amount);
 

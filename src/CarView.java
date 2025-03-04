@@ -1,8 +1,5 @@
 package src;
 
-import src.model.Model;
-import src.model.Position;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -12,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CarView extends JFrame implements ModelListener, View {
+public class CarView extends JFrame implements ModelListener {
     private static final String WINDOW_TITLE = "CarSim 1.0";
     private static final String PICTURE_NOT_FOUND_EXCEPTION = "PictureNotFoundException: Class name does not have corresponding picture. ";
     private int windowWidth;
@@ -20,7 +17,7 @@ public class CarView extends JFrame implements ModelListener, View {
 
     private DrawPanel drawPanel;
     private final Controller carController;
-    private final Model model;
+    private final Observable model;
 
     private final JPanel controlPanel = new JPanel();
     private final JPanel gasPanel = new JPanel();
@@ -40,7 +37,7 @@ public class CarView extends JFrame implements ModelListener, View {
     private final JButton startButton = new JButton("Start all cars");
     private final JButton stopButton = new JButton("Stop all cars");
 
-    public CarView(CarController carController, ArrayList<String> pictureRoutes, int windowWidth, int windowHeight, Model model, HashMap<String, String> classPictureMap){
+    public CarView(CarController carController, ArrayList<String> pictureRoutes, int windowWidth, int windowHeight, Observable model, HashMap<String, String> classPictureMap){
         this.carController = carController;
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;

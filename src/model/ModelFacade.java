@@ -1,15 +1,16 @@
 package src.model;
 
 import src.ModelListener;
+import src.Observable;
 
 import java.util.ArrayList;
 
-public class ModelFacade implements Model {
+public class ModelFacade implements Model, Observable {
     private final CarRepairShop<Volvo240> volvoRepairShop = new CarRepairShop<>(10);
     private final int workShopPickUpDist = 25; //Manhattan distance
     private final Position repairshopPosition = new Position(300, 100);
     private final ArrayList<Vehicle> vehicles;
-    private VehicleFactory vehicleFactory;
+    private final VehicleFactory vehicleFactory;
 
     private final ArrayList<ModelListener> listeners = new ArrayList<>();
     private final int mapWidth;
