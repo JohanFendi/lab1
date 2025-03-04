@@ -2,7 +2,7 @@ package src.model;
 
 import java.awt.*;
 
-public class  Scania extends Vehicle {
+public class Scania extends Vehicle {
 
     private static final int NR_DOORS = 2;
     private static final int ENGINE_POWER = 50;

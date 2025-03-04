@@ -139,8 +139,8 @@ public class ModelFacade implements Model, Observable {
     @Override
     public void liftBed() {
         for(Vehicle vehicle: this.vehicles){
-            if(vehicle instanceof Scania) {
-                ((Scania) vehicle).adjustRamp(70);
+            if(vehicle instanceof ContainerTruck) {
+                ((ContainerTruck) vehicle).adjustRamp(70);
             }
         }
     }
@@ -148,8 +148,8 @@ public class ModelFacade implements Model, Observable {
     @Override
     public void lowerBed() {
         for(Vehicle vehicle: this.vehicles) {
-            if(vehicle instanceof Scania) {
-                ((Scania) vehicle).adjustRamp(0);
+            if(vehicle instanceof ContainerTruck) {
+                ((ContainerTruck) vehicle).adjustRamp(0);
             }
         }
     }

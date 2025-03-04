@@ -35,6 +35,8 @@ abstract public class Vehicle implements Movable {
 
     abstract public boolean isMoveable();
 
+
+
     @Override
     public void turnLeft(){
         if(this.isMoveable()) Movement.turnLeft(this.vector);

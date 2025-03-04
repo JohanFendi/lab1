@@ -33,10 +33,12 @@ public class FlatbedM1<T> implements FlatBed<T>{
     public boolean isFull(){
         return this.storage.size() >= maxCapacity;
     }
+
     @Override
     public List<T> getLoadedCars() {
         return new ArrayList<>(this.storage);
     }
+
     @Override
     public int size(){
         return this.storage.size();

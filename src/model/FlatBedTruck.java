@@ -2,21 +2,25 @@ package src.model;
 
 import java.awt.*;
 
-public class FlatBedTruck extends Vehicle {
+public abstract class FlatBedTruck extends Vehicle {
 
-    private int FLATBED_MAXCAPACITY;
+
     private static double MAX_LOADING_RADIUS;
     private double UNLOAD_OFFSET;
-
 
     private boolean isFlatBedUp = true;
     private final FlatBed<Car> flatBed;
 
-    public FlatBedTruck(int nrDoors,Color color , double enginePower, String modelName, double maxLoadingRadius, double unloadOffset) {
+    public FlatBedTruck(int nrDoors, Color color, double enginePower,
+                        String modelName, double maxLoadingRadius, double unloadOffset,
+                        FlatBed<Car> flatBed) {
+
         super(nrDoors, color, enginePower, modelName);
         this.MAX_LOADING_RADIUS = maxLoadingRadius;
         this.UNLOAD_OFFSET = unloadOffset;
-        this.flatBed = new FlatbedM1<Car>(FLATBED_MAXCAPACITY);
+        this.flatBed = flatBed;
+
+        //this.flatBed = new FlatbedM1<Car>(FLATBED_MAXCAPACITY);
     }
 
     //Methods for loading, unloading and adjusting flatbed.
